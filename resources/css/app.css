@@ -1,0 +1,157 @@
+@import 'tailwindcss';
+@import "flowbite/src/themes/default";
+@source "../node_modules/flowbite";
+@plugin "flowbite/plugin";
+@plugin '@tailwindcss/forms';
+
+@font-face {
+    font-family: 'Inter';
+    src: url("/public/fonts/Inter-VariableFont_opsz,wght.ttf") format('truetype'),
+         url("/public/fonts/Inter-VariableFont_opsz,wght.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Space Grotesk';
+    src: url('/public/fonts/SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 700;
+    font-style: normal;
+}
+
+@theme {
+    --color-blue: #11E0FE;
+    --background-image-blue-hover: linear-gradient(180deg, #00E0FF 0%, #00BFFF 50%, #009DFF 100%);
+    --color-dark-gray: #313B45;
+    --color-light-gray: #6B7280;
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
+.dz-image img {
+    width: 120px !important;
+    height: 120px !important;
+}
+
+.font-inter {
+    font-family: 'Inter', 'Segoe UI', 'Arial', 'sans-serif';
+}
+
+.font-space-grotesk {
+    font-family: 'Space Grotesk', 'Segoe UI', 'Arial', 'sans-serif';
+}
+
+.custom-bg {
+    background-color: var(--default-background);
+}
+
+.border-custom {
+    border-color: var(--default-background);
+}
+.custom-color{
+    color: var(--default-background);
+}
+
+.required::after {
+    content: ' *';
+    color: #DC2626;
+    font-weight: 500;
+}
+
+/* Custom Rounded Toggle Switch */
+.toggle-switch-container {
+    display: inline-block;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #d8d5d5;
+    transition: .4s;
+    border-radius: 20px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(190, 160, 160, 0.2);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+    background-color: var(--default-background);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+    transform: translateX(20px);
+}
+
+.toggle-switch input:focus + .toggle-slider {
+    box-shadow: 0 0 1px var(--color-blue);
+}
+
+/* Hover effects */
+.toggle-switch:hover .toggle-slider {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch input:checked + .toggle-slider:hover {
+    box-shadow: 0 0 8px var(--default-background);
+}
+
+/* Toggle text styles */
+.toggle-text-off,
+.toggle-text-on {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    font-weight: 600;
+    color: white;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-text-off {
+    left: 6px;
+    opacity: 1;
+}
+
+.toggle-text-on {
+    right: 6px;
+    opacity: 0;
+}
+
+.toggle-switch input:checked + .toggle-slider .toggle-text-off {
+    opacity: 0;
+}
+
+.toggle-switch input:checked + .toggle-slider .toggle-text-on {
+    opacity: 1;
+}

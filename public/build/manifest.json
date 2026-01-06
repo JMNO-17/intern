@@ -1,0 +1,21 @@
+{
+  "public/fonts/Inter-VariableFont_opsz,wght.ttf": {
+    "file": "assets/Inter-VariableFont_opsz_wght-c8O0ljhh.ttf",
+    "src": "public/fonts/Inter-VariableFont_opsz,wght.ttf"
+  },
+  "public/fonts/SpaceGrotesk-VariableFont_wght.ttf": {
+    "file": "assets/SpaceGrotesk-VariableFont_wght-DIScfSlK.ttf",
+    "src": "public/fonts/SpaceGrotesk-VariableFont_wght.ttf"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-CXm0hz_U.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-PpwwlX72.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}
