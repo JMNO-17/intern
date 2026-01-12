@@ -132,6 +132,35 @@ return [
         ],
     ],
 
+    'category' => [
+        'title'             => 'Categories',
+        'title_singular'    => 'Category',
+        'description'       => 'A list of all the categories in your account including their name and description.',
+        'fields'            => [
+            'id'            => 'ID',
+            'section_id'    => 'Section',
+            'name'          => 'Name',
+            'description'   => 'Description',
+            'category_image' => 'Category Image',
+        ],
+    ],
+
+    'product'    => [
+        'title'             => 'Products',
+        'title_singular'    => 'Product',
+        'description'       => 'A list of all the products in your account including their name and description.',
+        'fields'            => [
+            'id'            => 'ID',
+            'category_id'   => 'Category',
+            'name'          => 'Name',
+            'slug'          => 'Slug',
+            'description'   => 'Description',
+            'price'         => 'Price',
+            'status'        => 'Status',
+            'product_image' => 'Product Image',
+        ],
+    ],
+
     'contentdescription'    => [
         'title'             => 'Content Descriptions',
         'title_singular'    => 'Content Description',

@@ -125,7 +125,45 @@ class PermissionsTableSeeder extends Seeder
             [
                 'name' => 'contentdescription_delete',
                 'display_name' => 'Content Description Delete',
-            ]
+            ],
+
+            // category
+
+            [
+                'name' => 'category_access',
+                'display_name' => 'Category Access',
+            ],
+            [
+                'name' => 'category_create',
+                'display_name' => 'Category Create',
+            ],
+            [
+                'name' => 'category_edit',
+                'display_name' => 'Category Edit',
+            ],
+            [
+                'name' => 'category_delete',
+                'display_name' => 'Category Delete',
+            ],
+
+            // product
+
+            [
+                'name' => 'product_access',
+                'display_name' => 'Product Access',
+            ],
+            [
+                'name' => 'product_create',
+                'display_name' => 'Product Create',
+            ],
+            [
+                'name' => 'product_edit',
+                'display_name' => 'Product Edit',
+            ],
+            [
+                'name' => 'product_delete',
+                'display_name' => 'Product Delete',
+            ],
 
         ];
 

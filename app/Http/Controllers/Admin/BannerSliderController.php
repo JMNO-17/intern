@@ -25,6 +25,7 @@ class BannerSliderController extends Controller
 
     public function index()
     {
+        // dd("This index method is disabled.");
         abort_if(Gate::denies('bannerslider_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $bannersliders = $this->bannersliderRepository->all();
         return view('admin.bannersliders.index', compact('bannersliders'));

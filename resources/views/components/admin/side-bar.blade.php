@@ -86,6 +86,30 @@
                                             </li>
                                         @endcan
 
+                                        @can('category_access')
+                                            <li>
+                                                <a href="{{ route('admin.categories.index') }}"
+                                                    aria-label="{{ __('labels.category.title') }}"
+                                                    class="group flex items-center gap-x-3 rounded-md p-2 text-sm font-semibold
+                                                    {{ request()->routeIs('admin.categories.*') ? 'custom-bg text-white ' : 'text-black' }}">
+                                                    <i
+                                                        class="flex-shrink-0 w-6 h-6 fas fa-tags"></i><span>{{ __('labels.category.title') }}</span>
+                                                </a>
+                                            </li>
+                                        @endcan
+
+                                        @can('product_access')
+                                            <li>
+                                                <a href="{{  route('admin.products.index') }}"
+                                                aria-label="{{ __('labels.product.title') }}"
+                                                class="group flex items-center gap-x-3 rounded-md p-2 text-sm font-semibold
+                                                {{ request()->routeIs('admin.products.*') ? 'custom-bg text-white ' : 'text-black' }}">
+                                                <i
+                                                        class="flex-shrink-0 w-6 h-6 fas fa-box"></i><span>{{ __('labels.product.title') }}</span>
+                                                </a>
+                                            </li>
+                                        @endcan
+
                                         @can('contentdescription_access')
                                             <li>
                                                 <a href="{{ route('admin.contentdescriptions.index') }}"
@@ -254,6 +278,30 @@
                                                 class="flex-shrink-0 w-6 h-6 fas fa-file-alt"></i><span>{{ __('labels.contentdescription.title') }}</span>
                                         </a>
                                     </li>
+                                @endcan
+
+                                @can('category_access')
+                                    <li>
+                                        <a href="{{ route('admin.categories.index') }}"
+                                            aria-label="{{ __('labels.category.title') }}"
+                                            class="group flex items-center gap-x-3 rounded-md p-2 text-sm font-semibold
+                                            {{ request()->routeIs('admin.categories.*') ? 'custom-bg text-white ' : 'text-black' }}">
+                                            <i
+                                                class="flex-shrink-0 w-6 h-6 fas fa-tags"></i><span>{{ __('labels.category.title') }}</span>
+                                        </a>
+                                    </li>
+                                @endcan
+
+                                @can('product_access')
+                                <li>
+                                    <a href="{{  route('admin.products.index') }}"
+                                    aria-label="{{ __('labels.product.title') }}"
+                                    class="group flex items-center gap-x-3 rounded-md p-2 text-sm font-semibold
+                                    {{ request()->routeIs('admin.products.*') ? 'custom-bg text-white ' : 'text-black' }}">
+                                    <i
+                                            class="flex-shrink-0 w-6 h-6 fas fa-box"></i><span>{{ __('labels.product.title') }}</span>
+                                    </a>
+                                </li>
                                 @endcan
 
                             </div>

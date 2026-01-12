@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\SiteMapController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 
 Route::group(
     ['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']],
@@ -31,6 +33,13 @@ Route::group(
         Route::post('bannersliders/storeMedia', [BannerSliderController::class, 'storeMedia'])->name('bannersliders.storeMedia');
         Route::post('bannersliders/removeMedia', [BannerSliderController::class, 'removeMedia'])->name('bannersliders.removeMedia');
         Route::resource('bannersliders', BannerSliderController::class);
+        Route::post('categories/storeMedia', [CategoryController::class, 'storeMedia'])->name('categories.storeMedia');
+        Route::post('categories/removeMedia', [CategoryController::class, 'removeMedia'])->name('categories.removeMedia');
+        Route::resource('categories', CategoryController::class);
+        Route::post('products/storeMedia', [ProductController::class, 'storeMedia'])->name('products.storeMedia');
+        Route::post('products/removeMedia', [ProductController::class, 'removeMedia'])->name('products.removeMedia');
+        Route::post('products/change-status', [ProductController::class, 'changeStatus'])->name('change.product.status');
+        Route::resource('products', ProductController::class);
 
         Route::post('contentdescriptions/storeMedia', [ContentDescriptionController::class, 'storeMedia'])->name('contentdescriptions.storeMedia');
         Route::post('contentdescriptions/removeMedia', [ContentDescriptionController::class, 'removeMedia'])->name('contentdescriptions.removeMedia');
