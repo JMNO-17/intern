@@ -128,18 +128,18 @@ class ProductController extends Controller
 
     public function changeStatus(Request $request)
     {
-        $activeCount = User::where('status', true)->count();
+        $activeCount = Product::where('status', true)->count();
         if ($activeCount <= 1 && $request->status == 'false') {
-            return response()->json(['error' => 'One User Must Be Active.'], 400);
+            return response()->json(['error' => 'One Product Must Be Active.'], 400);
         } else {
-            $user = User::find($request->id);
-            $user->status = $request->status == 'false' ? false : true;
+            $Product = Product::find($request->id);
+            $Product->status = $request->status == 'false' ? false : true;
             if ($request->status == false) {
-                $user->save();
+                $Product->save();
             } elseif ($request->status == true) {
-                $user->save();
+                $Product->save();
             }
-            $user->save();
+            $Product->save();
             return response()->json(['success' => 'Successfully change status.'], 200);
         }
     }
