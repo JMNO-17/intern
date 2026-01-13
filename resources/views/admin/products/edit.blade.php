@@ -103,23 +103,41 @@
                                     ])
                                 @endif
                             </div>
-                            <div class="col-span-full">
-                                <label for="product_image" class="block text-sm font-medium text-gray-900">
-                                    {{ __('labels.product.fields.product_image') }}
-                                </label>
-                                <div class="mt-2 flex flex-col gap-y-2">
-                                    <div id="productImageDropzone"
-                                        class="needsclick dropzone rounded-md border-2 border-dashed border-gray-300 bg-gray-50 p-4">
+
+                            <div class="sm:col-span-full">
+                                <div class="col-span-full">
+                                    <label for="featured_image" class="block text-sm font-medium text-gray-900">
+                                        {{ __('labels.product.fields.featured_image') }}
+                                    </label>
+                                    <div class="mt-2 flex flex-col gap-y-2">
+                                        <div id="featuredImageDropzone"
+                                            class="needsclick dropzone rounded-md border-2 border-dashed border-gray-300 bg-gray-50 p-4">
+                                        </div>
+                                        <span class="text-xs text-gray-500">{{__('global.max_size')}} {{__('global.valid_formats')}}</span>
                                     </div>
-                                    <div class="flex items-center gap-x-3 mt-2">
-                                        <span class="text-xs text-gray-500">{{ __('global.valid_formats') }}
-                                            {{ __('global.max_size') }}</span>
-                                    </div>
+                                    @error('featured_image')
+                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
                                 </div>
-                                @error('product_image')
-                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                @enderror
                             </div>
+
+                            <div class="sm:col-span-full">
+                                <div class="col-span-full">
+                                    <label for="other_images" class="block text-sm font-medium text-gray-900">
+                                        {{ __('labels.product.fields.other_images') }}
+                                    </label>
+                                    <div class="mt-2 flex flex-col gap-y-2">
+                                        <div id="otherImagesDropzone"
+                                            class="needsclick dropzone rounded-md border-2 border-dashed border-gray-300 bg-gray-50 p-4">
+                                        </div>
+                                        <span class="text-xs text-gray-500">{{__('global.valid_formats')}} {{__('global.max_size')}}</span>
+                                    </div>
+                                    @error('other_images')
+                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -140,16 +158,17 @@
 @section('scripts')
     <script>
         var uploadedDocumentMap = {}
-        Dropzone.options.productImageDropzone = {
+        var uploadedOtherImagesMap = {}
+        Dropzone.options.featuredImageDropzone = {
             url: '{{ route('admin.products.storeMedia') }}',
             maxFilesize: 2, // MB
-            maxFiles: 5,
+            maxFiles: 1,
             addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
             },
             success: function(file, response) {
-                $('form').append('<input type="hidden" name="product_image[]" value="' + response.name + '">')
+                $('form').append('<input type="hidden" name="featured_image[]" value="' + response.name + '">')
                 uploadedDocumentMap[file.name] = response.name
             },
             removedfile: function(file) {
@@ -170,46 +189,92 @@
                         } else {
                             name = uploadedDocumentMap[file.name]
                         }
-                        $('form').find('input[name="product_image[]"][value="' + name + '"]').remove();
-                        removeMedia(file.name, 'product_image');
+                        $('form').find('input[name="featured_image[]"][value="' + name + '"]').remove();
+                        removeMedia(file.name, 'featured_image');
                     }
                 });
             },
             init: function() {
-                @if (isset($product) && $product->getMedia('product_image')->count())
-                    @php
-                        $productImages = $product->getMedia('product_image');
-                    @endphp
-                    @if ($productImages->count() > 1)
-                        @foreach ($productImages as $media)
-                            var fileName = {!! json_encode($media->file_name) !!};
-                            var mockFile = {
-                                name: fileName,
-                                size: 2,
-                                accepted: true
-                            };
-                            var publicUrl = {!! json_encode($media->getFullUrl()) !!};
-                            this.emit('addedfile', mockFile);
-                            this.emit('thumbnail', mockFile, publicUrl);
-                            this.emit('complete', mockFile);
-                            this.files.push(mockFile);
-                        @endforeach
-                    @else
-                        @php
-                            $media = $productImages->first();
-                        @endphp
-                        var fileName = {!! json_encode($media->file_name) !!};
+                @if (isset($product) &&
+                        $product->getMedia('featured_image')->first() &&
+                        $product->getMedia('featured_image')->first() !== '/user-avatar.png')
+                    var fileName = {!! json_encode(\App\Models\Product::getImageName($product->featured_image)) !!};
+
+                    console.log('file name',fileName);
+                    var mockFile = {
+                        name: fileName,
+                        size: 2,
+                        accepted: true
+                    };
+                    // Always use a public URL for preview
+                    var publicUrl = '';
+                    var imgPath = {!! json_encode($product->getMedia('featured_image')->first()->getFullUrl()) !!};
+
+                    console.log('path', imgPath);
+                    if (imgPath.startsWith('/images/')) {
+                        publicUrl = imgPath;
+                    } else {
+                        publicUrl = imgPath;
+                    }
+                    this.emit('addedfile', mockFile);
+                    this.emit('thumbnail', mockFile, publicUrl);
+                    this.emit('complete', mockFile);
+                    this.files.push(mockFile);
+                @endif
+            }
+        }
+
+        Dropzone.options.otherImagesDropzone = {
+            url: '{{ route('admin.products.storeMedia') }}',
+            maxFilesize: 2, // MB
+            maxFiles: 5, // Allow multiple images
+            addRemoveLinks: true,
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                'type': 'other_images'
+            },
+            success: function(file, response) {
+                $('form').append('<input type="hidden" name="other_images[]" value="' + response.name + '">')
+                uploadedOtherImagesMap[file.name] = response.name
+            },
+            removedfile: function(file) {
+                Swal.fire({
+                    title: "Are you sure you want to remove this image?",
+                    text: "If you remove this, it will be delete from data.",
+                    icon: "warning",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#FF0000',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((willDelete) => {
+                    if (willDelete.isConfirmed) {
+                        file.previewElement.remove()
+                        var name = ''
+                        if (typeof file.file_name !== 'undefined') {
+                            name = file.file_name
+                        } else {
+                            name = uploadedOtherImagesMap[file.name]
+                        }
+                        $('form').find('input[name="other_images[]"][value="' + name + '"]').remove();
+                        removeMedia(file.name, 'other_images');
+                    }
+                });
+            },
+            init: function() {
+                @if (isset($product) && $product->getMedia('other_images')->count() > 0)
+                    @foreach ($product->getMedia('other_images') as $image)
+                        var fileName = {!! json_encode($image->name) !!};
                         var mockFile = {
                             name: fileName,
                             size: 2,
                             accepted: true
                         };
-                        var publicUrl = {!! json_encode($media->getFullUrl()) !!};
+                        var publicUrl = {!! json_encode($image->getFullUrl()) !!};
                         this.emit('addedfile', mockFile);
                         this.emit('thumbnail', mockFile, publicUrl);
                         this.emit('complete', mockFile);
                         this.files.push(mockFile);
-                    @endif
+                    @endforeach
                 @endif
             }
         }

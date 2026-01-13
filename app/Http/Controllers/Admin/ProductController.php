@@ -24,9 +24,7 @@ class ProductController extends Controller
         $this->productRepository = $productRepository;
         $this->categories = Category::all();
     }
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         abort_if(Gate::denies('product_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -34,9 +32,6 @@ class ProductController extends Controller
         return view('admin.products.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         abort_if(Gate::denies('product_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -44,36 +39,31 @@ class ProductController extends Controller
         return view('admin.products.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $this->productRepository->store($request->all());
         return redirect()->route('admin.products.index')->with('success', __('global.created_success'));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Product $product)
     {
-        abort_if(Gate::denies('product_access'),Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('product_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $fields = Arr::except($product->getAttributes(), ['id', 'deleted_at', 'created_at', 'updated_at']);
         $fields['category_id'] = optional($product->category)->name;
-
         $redirect_route = route('admin.products.index');
         $label = 'product';
-        $images = $product->getMedia('product_image');
+        $images = $product->getMedia('featured_image');
         if ($images->isNotEmpty()) {
-            $fields['product_image'] = $images;
+            $fields['featured_image'] = $images;
+        }
+        $otherImages = $product->getMedia('other_images');
+        if ($otherImages->isNotEmpty()) {
+            $fields['other_images'] = $otherImages;
         }
         return view('admin.common.show', compact('label', 'fields', 'redirect_route'));
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Product $product)
     {
         abort_if(Gate::denies('product_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -81,18 +71,13 @@ class ProductController extends Controller
         return view('admin.products.edit', compact('product', 'categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Product $product)
     {
         $this->productRepository->update($request->all(), $product);
         return redirect()->route('admin.products.index')->with('success', __('global.updated_success'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(product $product)
     {
         abort_if(Gate::denies('product_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -102,7 +87,12 @@ class ProductController extends Controller
 
     public function storeMedia(Request $request)
     {
-        $path = storage_path('uploads/temp/product/' . Auth::id());
+        if ($request->header('type')) {
+            $path = storage_path('uploads/temp/productOtherImages/' . Auth::id());
+        } else {
+            $path = storage_path('uploads/temp/product/' . Auth::id());
+        }
+
         $file = $request->file('file');
         $response = common::storeMedia($path, $file);
         return $response;
@@ -113,13 +103,27 @@ class ProductController extends Controller
         $type = $request->type;
         $product = product::find($request->id);
         $status = false;
-        if ($type == 'product_image') {
-            $mediaItem = $product->getMedia('product_image')->first();
-            if ($mediaItem) {
-                $mediaItem->delete();
-                $status = true;
-            }
+        if (! $product) {
+            return response()->json([
+                'status' => false,
+                'type' => $type,
+                'message' => 'Content Description not found.',
+            ], 404);
         }
+        if ($type == 'featured_image') {
+            $product->clearMediaCollection('featured_image');
+            $status = true;
+        } elseif ($type == 'other_images') {
+            if ($request->has('type') == 'other_images') {
+                $media = $product->getMedia('other_images')->where('name', $request->file_name)->first();
+                if ($media) {
+                    $media->delete();
+                    $status = true;
+                }
+            }
+            $status = true;
+        }
+
         return response()->json([
             'status' => $status,
             'type' => $type,

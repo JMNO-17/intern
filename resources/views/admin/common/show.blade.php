@@ -40,7 +40,11 @@
                                     @elseif ($value instanceof \Spatie\MediaLibrary\MediaCollections\Models\Media)
                                         <img src="{{ $value->getFullUrl() }}" alt="{{ $key }}" class="h-32">
                                     @else
-                                        {{ $value ?? '-' }}
+                                        @if ($key === 'status')
+                                            {{ $value ? 'Active' : 'Inactive' }}
+                                        @else
+                                            {{ $value ?? '-' }}
+                                        @endif
                                     @endif
                                 </dd>
                             </div>

@@ -157,7 +157,8 @@ return [
             'description'   => 'Description',
             'price'         => 'Price',
             'status'        => 'Status',
-            'product_image' => 'Product Image',
+            'featured_image' => 'Featured Image',
+            'other_images' => 'Other Images',
         ],
     ],
 

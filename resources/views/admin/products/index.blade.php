@@ -81,6 +81,7 @@
                                         ])
                                 </td>
 
+
                                 <td class="px-6 py-4 flex items-center justify-end gap-2">
                                     @can('product_access')
                                             <a href="{{ route('admin.products.show', $product) }}" class="custom-color">
