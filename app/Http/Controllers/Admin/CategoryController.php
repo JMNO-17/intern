@@ -6,6 +6,8 @@ use App\Helpers\common;
 use App\Models\Section;
 use Illuminate\Support\Arr;
 use App\Models\Category;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
@@ -45,7 +47,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
         $this->categoryRepository->store($request->all());
         return redirect()->route('admin.categories.index')->with('success', __('global.created_success'));
@@ -83,7 +85,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
         $this->categoryRepository->update($request->all(),$category);
         return redirect()->route('admin.categories.index')->with('success', __('global.updated_success'));

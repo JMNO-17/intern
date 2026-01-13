@@ -38,7 +38,7 @@
                                     Category ( {{ __('labels.category.fields.name') }} )
                                 </th>
                                 <th scope="col" class="px-6 py-3 font-semibold">{{ __('labels.product.fields.name') }}</th>
-                                <th scope="col" class="px-6 py-3 font-semibold">{{ __('labels.product.fields.slug') }}</th>
+                                {{-- <th scope="col" class="px-6 py-3 font-semibold">{{ __('labels.product.fields.slug') }}</th> --}}
                                 <th scope="col" class="px-6 py-3 font-semibold">{{ __('labels.product.fields.price') }}</th>
                                 <th scope="col" class="px-6 py-3 font-semibold">{{ __('labels.product.fields.status') }}</th>
 
@@ -65,9 +65,9 @@
                                     {{ $product->name ?? '' }}
                                 </td>
 
-                                <td class="px-6 py-4 font-medium text-gray-900">
+                                {{-- <td class="px-6 py-4 font-medium text-gray-900">
                                     {{ $product->slug ?? '' }}
-                                </td>
+                                </td> --}}
 
                                 <td class="px-6 py-4 font-medium text-gray-900">
                                     {{ $product->price ?? '' }}

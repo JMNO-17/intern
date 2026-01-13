@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\common;
 use App\Models\Category;
-
-
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Support\Arr;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -39,8 +39,15 @@ class ProductController extends Controller
         return view('admin.products.create', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'price' => 'required|numeric|min:0',
+        //     'category_id' => 'required|exists:categories,id',
+        // ]);
+
+
         $this->productRepository->store($request->all());
         return redirect()->route('admin.products.index')->with('success', __('global.created_success'));
     }
@@ -71,7 +78,7 @@ class ProductController extends Controller
         return view('admin.products.edit', compact('product', 'categories'));
     }
 
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
         $this->productRepository->update($request->all(), $product);
         return redirect()->route('admin.products.index')->with('success', __('global.updated_success'));

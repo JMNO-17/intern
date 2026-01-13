@@ -5,13 +5,24 @@ namespace App\Models;
 use DateTimeInterface;
 use App\Models\Category;
 use App\Traits\ImageTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model implements HasMedia
 {
-    use ImageTrait, InteractsWithMedia;
+    use ImageTrait, InteractsWithMedia, Sluggable;
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => ['name'],
+                'onUpdate' => true,
+            ],
+        ];
+    }
 
     protected $dates = [
         'created_at',

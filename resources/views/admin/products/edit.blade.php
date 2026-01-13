@@ -54,12 +54,12 @@
                                 @endif
                             </div>
 
-                            <div class="sm:col-span-3">
+                            {{-- <div class="sm:col-span-3">
                                 <label for="slug" class="block text-sm/6 font-medium text-gray-900 required">
                                     {{ __('labels.product.fields.slug') }}
                                 </label>
                                 <div class="mt-2">
-                                    <input type="text" name="slug" id="slug" value="{{ old('slug', $product->slug) }}" autocomplete="given-slug" required
+                                    <input type="text" name="slug" id="slug" value="{{ old('slug', $product->slug) }}" autocomplete="given-slug"
                                         class="form-input block w-full rounded-md border-gray-300 focus:border-[var(--default-background)] focus:ring focus:ring-[var(--default-background)] focus:ring-opacity-50 sm:text-sm">
                                 </div>
                                 @if ($errors->has('slug'))
@@ -68,7 +68,7 @@
                                         'errors' => $errors,
                                     ])
                                 @endif
-                            </div>
+                            </div> --}}
 
                             <div class="sm:col-span-3">
                                 <label for="price" class="block text-sm/6 font-medium text-gray-900 required">
@@ -91,10 +91,14 @@
                                 <label for="description" class="block text-sm/6 font-medium text-gray-900 required">
                                     {{ __('labels.product.fields.description') }}
                                 </label>
-                                <div class="mt-2">
+                                {{-- <div class="mt-2">
                                     <textarea name="description" id="description" autocomplete="given-description" required
                                         class="form-input block w-full rounded-md border-gray-300 focus:border-[var(--default-background)] focus:ring focus:ring-[var(--default-background)] focus:ring-opacity-50 sm:text-sm">{{ old('description', $product->description) }}
                                     </textarea>
+                                </div> --}}
+                                <div class="mt-2">
+                                    <div id="description-area" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm">{!! old('description', $product->description) !!}</div>
+                                    <textarea id="description" name="description" hidden>{{ old('description', $product->description) }}</textarea>
                                 </div>
                                 @if ($errors->has('description'))
                                     @include('admin.common.validation-error', [
@@ -305,5 +309,40 @@
                 }
             });
         }
+
+        // Quill Editor Initialization
+
+          if (document.getElementById('description')) {
+            var editor = new Quill('#description-area', {
+                theme: 'snow',
+                modules: {
+                    toolbar: [
+                        [{ header: [1, 2, 3, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ align: ['right', 'center', 'justify'] }],
+                        [{ color: ['#000000', '#ff0000', '#00ff00'] }],
+                        ['image'],
+                        [{ list: 'ordered' }, { list: 'bullet' }],
+                        ['clean']
+                    ]
+                }
+            });
+
+            var description = document.getElementById('description');
+
+            // Initial sync from the editor content into the hidden textarea
+            description.value = editor.root.innerHTML;
+
+            editor.on('text-change', function() {
+                description.value = editor.root.innerHTML;
+            });
+
+            // Ensure textarea is updated on form submit (safety)
+            document.querySelector('form').addEventListener('submit', function() {
+                description.value = editor.root.innerHTML;
+            });
+        }
+
     </script>
 @endsection
+

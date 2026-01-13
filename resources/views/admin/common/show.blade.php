@@ -42,6 +42,8 @@
                                     @else
                                         @if ($key === 'status')
                                             {{ $value ? 'Active' : 'Inactive' }}
+                                        @elseif ($key === 'description')
+                                            {!! $value ?? '-' !!}
                                         @else
                                             {{ $value ?? '-' }}
                                         @endif
