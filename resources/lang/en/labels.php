@@ -83,6 +83,9 @@ return [
             'seo_keywords'  => 'SEO Keywords',
             'seo_enabled'   => 'Enable SEO',
             'default_bg_color' => 'Default Background Color',
+            'address'       => 'Address',
+            'phone'         => 'Phone',
+
 
             // quick links
             'quick_link_a'  => 'Quick Link A',
@@ -119,44 +122,42 @@ return [
             'menu_id'       => 'Menu',
         ],
     ],
-    'bannerslider'          => [
-        'title'             => 'Banner Sliders',
-        'title_singular'    => 'Banner Slider',
-        'description'       => 'A list of all the bannerslider in your account including their name and description.',
+    
+    'about'          => [
+        'title'             => 'About Us',
+        'title_singular'    => 'About Us',
+        'description'       => 'A list of all the about us in your account including their name and description.',
         'fields'            => [
             'id'            => 'ID',
             'section_id'    => 'Section',
-            'banner_image'  => 'Banner Image',
+            'about_image'  => 'About Image',
             'name'          => 'Name',
             'description'   => 'Description'
         ],
     ],
 
-    'category' => [
-        'title'             => 'Categories',
-        'title_singular'    => 'Category',
-        'description'       => 'A list of all the categories in your account including their name and description.',
+    'service' => [
+        'title'             => 'Services',
+        'title_singular'    => 'Service',
+        'description'       => 'A list of all the services in your account including their name and description.',
         'fields'            => [
             'id'            => 'ID',
             'section_id'    => 'Section',
             'name'          => 'Name',
             'description'   => 'Description',
-            'category_image' => 'Category Image',
+            'service_image' => 'Service Image',
         ],
     ],
 
     'product'    => [
         'title'             => 'Products',
         'title_singular'    => 'Product',
-        'description'       => 'A list of all the products in your account including their name and description.',
+         'description'       => 'A list of all the products in your account including their name and description.',
         'fields'            => [
             'id'            => 'ID',
-            'category_id'   => 'Category',
+            'section_id'    => 'Section',
             'name'          => 'Name',
             'slug'          => 'Slug',
-            'description'   => 'Description',
-            'price'         => 'Price',
-            'status'        => 'Status',
             'featured_image' => 'Featured Image',
             'other_images' => 'Other Images',
         ],

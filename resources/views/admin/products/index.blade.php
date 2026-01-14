@@ -35,12 +35,11 @@
                             <tr>
                                 <th scope="col" class="px-6 py-3 font-semibold">{{ __('global.no') }}</th>
                                 <th scope="col" class="px-6 py-3 font-semibold">
-                                    Category ( {{ __('labels.category.fields.name') }} )
+                                    Section ( {{ __('labels.section.fields.name') }} )
                                 </th>
                                 <th scope="col" class="px-6 py-3 font-semibold">{{ __('labels.product.fields.name') }}</th>
                                 {{-- <th scope="col" class="px-6 py-3 font-semibold">{{ __('labels.product.fields.slug') }}</th> --}}
-                                <th scope="col" class="px-6 py-3 font-semibold">{{ __('labels.product.fields.price') }}</th>
-                                <th scope="col" class="px-6 py-3 font-semibold">{{ __('labels.product.fields.status') }}</th>
+                               
 
                                 <th scope="col" class="px-6 py-3">
                                     <span class="sr-only">{{ __('global.action') }}</span>
@@ -54,31 +53,15 @@
                                     {{ $loop->iteration ?? '' }}
                                 </td>
                                 <td class="px-6 py-4 font-medium text-gray-900">
-                                    @if($product->category)
-                                        {{ $product->category->name ?? '' }}
-                                        @if(optional($product->category->menu)->name)
-                                            ({{ $product->category->menu->name }})
+                                    @if($product->section)
+                                        {{ $product->section->name ?? '' }}
+                                        @if(optional($product->section->menu)->name)
+                                            ({{ $product->section->menu->name }})
                                         @endif
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 font-medium text-gray-900">
                                     {{ $product->name ?? '' }}
-                                </td>
-
-                                {{-- <td class="px-6 py-4 font-medium text-gray-900">
-                                    {{ $product->slug ?? '' }}
-                                </td> --}}
-
-                                <td class="px-6 py-4 font-medium text-gray-900">
-                                    {{ $product->price ?? '' }}
-                                </td>
-
-                                <td class="px-6 py-4">
-                                        @include('admin.common.change-status',[
-                                            'id' => $product->id,
-                                            'status' => $product->status == true ? 'checked' : '',
-                                            'url' => route('admin.change.product.status')
-                                        ])
                                 </td>
 
 

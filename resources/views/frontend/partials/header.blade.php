@@ -1,11 +1,15 @@
-<div class="bg-white dark:bg-black px-5 lg:px-20">
+<div class="bg-white dark:bg-base3 px-5 lg:px-20">
     <nav aria-label="Global" class="mx-auto flex max-w-7xl items-center justify-between py-6">
+        @php
+            $settings = $settings ?? [];
+            $all_menus = $all_menus ?? collect();
+        @endphp
         <div class="flex lg:flex-1">
             <a href="#" class="-m-1.5 p-1.5">
-                <span class="sr-only">{{ $settings['site_name'] }}</span>
-                <img src="{{ $settings['site_logo'] }}" alt="Logo"
+                <span class="sr-only">{{ $settings['site_name'] ?? config('app.name') }}</span>
+                <img src="{{ $settings['site_logo'] ?? asset('images/logo.png') }}" alt="Logo"
                     class="h-8 w-auto dark:hidden" />
-                <img src="{{ $settings['site_logo'] }}" alt="Logo"
+                <img src="{{ $settings['site_logo'] ?? asset('images/logo.png') }}" alt="Logo"
                     class="h-8 w-auto not-dark:hidden" />
             </a>
         </div>
@@ -22,7 +26,12 @@
         </div>
         <div class="hidden lg:flex lg:gap-x-12">
             @foreach ($all_menus as $menu)
-                <a href="{{ route($menu->route_name) }}" class="text-sm/6 font-semibold text-gray-900 dark:text-white">{{ $menu->name }}</a>
+                @php $route = $menu->route_name ?? null; @endphp
+                @if($route && Route::has($route))
+                    <a href="{{ route($route) }}" class="text-sm/6 font-semibold text-gray-900 dark:text-black hover:text-white">{{ $menu->name }}</a>
+                @else
+                    <a href="#" class="text-sm/6 font-semibold text-gray-900 dark:text-black hover:text-white">{{ $menu->name }}</a>
+                @endif
             @endforeach
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
@@ -57,7 +66,12 @@
                         <div class="-my-6 divide-y divide-gray-500/10 dark:divide-white/10">
                             <div class="space-y-2 py-6">
                                 @foreach ($all_menus as $menu)
-                                    <a href="{{ $menu->route_name }}" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5">{{ $menu->name }}</a>
+                                    @php $route = $menu->route_name ?? null; @endphp
+                                    @if($route && Route::has($route))
+                                        <a href="{{ route($route) }}" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5">{{ $menu->name }}</a>
+                                    @else
+                                        <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5">{{ $menu->name }}</a>
+                                    @endif
                                 @endforeach
 
                             </div>

@@ -20,9 +20,9 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             MenuSeeder::class,
             SectionSeeder::class,
-            BannerSliderSeeder::class,
+            AboutSeeder::class,
             ContentDescriptionSeeder::class,
-            CategorySeeder::class,
+            ServiceSeeder::class,
             ProductSeeder::class,
         ]);
     }

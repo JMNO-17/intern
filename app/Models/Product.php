@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use DateTimeInterface;
-use App\Models\Category;
+use App\Models\Section;
 use App\Traits\ImageTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -32,10 +32,7 @@ class Product extends Model implements HasMedia
     protected $fillable = [
         'name',
         'slug',
-        'category_id',
-        'description',
-        'price',
-        'status',
+        'section_id',
     ];
 
     protected function serializeDate(\DateTimeInterface $date)
@@ -52,8 +49,8 @@ class Product extends Model implements HasMedia
             ->acceptsMimeTypes(['image/jpeg', 'image/png','image/jpg', 'image/webp']);
     }
 
-    public function category()
+    public function section()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Section::class);
     }
 }

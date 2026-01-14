@@ -35,13 +35,13 @@ class Section extends Model
         return $this->hasMany(ContentDescription::class);
     }
 
-    public function bannerslider()
+    public function about()
     {
-        return $this->hasMany(BannerSlider::class);
+        return $this->hasMany(About::class);
     }
 
     protected static array $moduleMap = [
-        'bannerslider' => 'Banner Slider',
+        'about' => 'About',
         'content_descriptions' => 'Content Description',
     ];
 

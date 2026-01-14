@@ -7,11 +7,11 @@
         <title>{{ config('app.name', 'Admin Dashboard') }}</title>
         {{-- env('SEO_KEYWORDS') --}}
 
-        <link rel="icon" type="image/png" href="{{ asset($settings['favicon']) }}">
+        <link rel="icon" type="image/png" href="{{ asset($settings['favicon'] ?? 'images/favicon.png') }}">
 
         <!-- SEO -->
-        <meta name="title" content="{{ $settings['seo_title'] }}">
-        <meta name="description" content="{{ $settings['seo_content'] }}">
+        <meta name="title" content="{{ $settings['seo_title'] ?? config('app.name') }}">
+        <meta name="description" content="{{ $settings['seo_content'] ?? '' }}">
         <meta name="keywords" content="{{ env('SEO_KEYWORDS', 'Admin Dashboard') }}">
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])

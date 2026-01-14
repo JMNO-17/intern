@@ -5,14 +5,14 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 
-class UpdateCategoryRequest extends FormRequest
+class StoreServiceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return Gate::allows('category_edit');
+        return Gate::allows('service_create');
     }
 
     /**
@@ -22,10 +22,8 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [
-            'name' => 'required|string|max:255',
+        return [
+            'name' => 'required|string|max:255|unique:categories,name',
         ];
-
-        return $rules;
     }
 }

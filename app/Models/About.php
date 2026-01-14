@@ -9,9 +9,11 @@ use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class BannerSlider extends Model implements HasMedia
+class About extends Model implements HasMedia
 {
     use  ImageTrait, InteractsWithMedia;
+
+    protected $table = 'about_us';
 
     protected $dates = [
         'created_at',
@@ -33,7 +35,7 @@ class BannerSlider extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('banner_image')
+        $this->addMediaCollection('aboutus_image')
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/gif', 'image/webp']);
     }
 

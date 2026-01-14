@@ -15,21 +15,31 @@ class ProductSeeder extends Seeder
     {
         $products = [
             [
-                'name'        => 'Product 1',
+                'name'        => 'Aricon Product 1',
                 'slug'        => 'product-1',
-                'category_id' => 1,
-                'description' => 'Description for Product 1',
-                'price'       => 19.99,
-                'status'      => true,
+                'section_id' => 4,
             ],
             [
-                'name'        => 'Product 2',
+                'name'        => 'TV Product 1',
                 'slug'        => 'product-2',
-                'category_id' => 2,
-                'description' => 'Description for Product 2',
-                'price'       => 29.99,
-                'status'      => true,
+                'section_id' => 5,
             ],
+            [
+                'name'        => 'Washing Machine Product 1',
+                'slug'        => 'product-3',
+                'section_id' => 6,
+            ],
+            [
+                'name'        => 'Refrigerator Product 1',
+                'slug'        => 'product41',
+                'section_id' => 7,
+            ],
+            [
+                'name'        => 'Spare Parts Product 1',
+                'slug'        => 'product-5',
+                'section_id' => 8,
+            ],
+            
         ];
 
         Product::insert($products);

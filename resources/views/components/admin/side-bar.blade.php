@@ -74,26 +74,28 @@
                                             </li>
                                         @endcan
 
-                                        @can('bannerslider_access')
+                                    
+
+                                        @can('about_access')
                                             <li>
-                                                <a href="{{ route('admin.bannersliders.index') }}"
-                                                    aria-label="{{ __('labels.bannerslider.title') }}"
+                                                <a href="{{ route('admin.abouts.index') }}"
+                                                    aria-label="{{ __('labels.about.title') }}"
                                                     class="group flex items-center gap-x-3 rounded-md p-2 text-sm font-semibold
-                                                    {{ request()->routeIs('admin.bannersliders.*') ? 'custom-bg text-white ' : 'text-black' }}">
+                                                    {{ request()->routeIs('admin.abouts.*') ? 'custom-bg text-white ' : 'text-black' }}">
                                                     <i
-                                                        class="flex-shrink-0 w-6 h-6 fa-solid fa-images"></i><span>{{ __('labels.bannerslider.title') }}</span>
+                                                        class="flex-shrink-0 w-6 h-6 fa-solid fa-images"></i><span>{{ __('labels.about.title') }}</span>
                                                 </a>
                                             </li>
                                         @endcan
 
-                                        @can('category_access')
+                                        @can('service_access')
                                             <li>
                                                 <a href="{{ route('admin.categories.index') }}"
-                                                    aria-label="{{ __('labels.category.title') }}"
+                                                    aria-label="{{ __('labels.service.title') }}"
                                                     class="group flex items-center gap-x-3 rounded-md p-2 text-sm font-semibold
                                                     {{ request()->routeIs('admin.categories.*') ? 'custom-bg text-white ' : 'text-black' }}">
                                                     <i
-                                                        class="flex-shrink-0 w-6 h-6 fas fa-tags"></i><span>{{ __('labels.category.title') }}</span>
+                                                        class="flex-shrink-0 w-6 h-6 fas fa-tags"></i><span>{{ __('labels.service.title') }}</span>
                                                 </a>
                                             </li>
                                         @endcan
@@ -256,14 +258,14 @@
                                     </li>
                                 @endcan
 
-                                @can('bannerslider_access')
+                                @can('about_access')
                                     <li>
-                                        <a href="{{ route('admin.bannersliders.index') }}"
-                                            aria-label="{{ __('labels.bannerslider.title') }}"
+                                        <a href="{{ route('admin.abouts.index') }}"
+                                            aria-label="{{ __('labels.about.title') }}"
                                             class="group flex items-center gap-x-3 rounded-md p-2 text-sm font-semibold
-                                            {{ request()->routeIs('admin.bannersliders.*') ? 'custom-bg text-white ' : 'text-black' }}">
+                                            {{ request()->routeIs('admin.abouts.*') ? 'custom-bg text-white ' : 'text-black' }}">
                                             <i
-                                                class="flex-shrink-0 w-6 h-6 fa-solid fa-images"></i><span>{{ __('labels.bannerslider.title') }}</span>
+                                                class="flex-shrink-0 w-6 h-6 fa-solid fa-images"></i><span>{{ __('labels.about.title') }}</span>
                                         </a>
                                     </li>
                                 @endcan
@@ -280,14 +282,14 @@
                                     </li>
                                 @endcan
 
-                                @can('category_access')
+                                @can('service_access')
                                     <li>
                                         <a href="{{ route('admin.categories.index') }}"
-                                            aria-label="{{ __('labels.category.title') }}"
+                                            aria-label="{{ __('labels.service.title') }}"
                                             class="group flex items-center gap-x-3 rounded-md p-2 text-sm font-semibold
                                             {{ request()->routeIs('admin.categories.*') ? 'custom-bg text-white ' : 'text-black' }}">
                                             <i
-                                                class="flex-shrink-0 w-6 h-6 fas fa-tags"></i><span>{{ __('labels.category.title') }}</span>
+                                                class="flex-shrink-0 w-6 h-6 fas fa-tags"></i><span>{{ __('labels.service.title') }}</span>
                                         </a>
                                     </li>
                                 @endcan

@@ -7,12 +7,12 @@ use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\LogoutController;
-use App\Http\Controllers\Admin\BannerSliderController;
+use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\SiteMapController;
-use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ProductController;
 
 Route::group(
@@ -30,12 +30,12 @@ Route::group(
         Route::resource('permissions', PermissionController::class);
         Route::resource('roles', RoleController::class);
         Route::resource('menus', MenuController::class);
-        Route::post('bannersliders/storeMedia', [BannerSliderController::class, 'storeMedia'])->name('bannersliders.storeMedia');
-        Route::post('bannersliders/removeMedia', [BannerSliderController::class, 'removeMedia'])->name('bannersliders.removeMedia');
-        Route::resource('bannersliders', BannerSliderController::class);
-        Route::post('categories/storeMedia', [CategoryController::class, 'storeMedia'])->name('categories.storeMedia');
-        Route::post('categories/removeMedia', [CategoryController::class, 'removeMedia'])->name('categories.removeMedia');
-        Route::resource('categories', CategoryController::class);
+        Route::post('abouts/storeMedia', [AboutController::class, 'storeMedia'])->name('abouts.storeMedia');
+        Route::post('abouts/removeMedia', [AboutController::class, 'removeMedia'])->name('abouts.removeMedia');
+        Route::resource('abouts', AboutController::class);
+        Route::post('categories/storeMedia', [ServiceController::class, 'storeMedia'])->name('categories.storeMedia');
+        Route::post('categories/removeMedia', [ServiceController::class, 'removeMedia'])->name('categories.removeMedia');
+        Route::resource('categories', ServiceController::class);
         Route::post('products/storeMedia', [ProductController::class, 'storeMedia'])->name('products.storeMedia');
         Route::post('products/removeMedia', [ProductController::class, 'removeMedia'])->name('products.removeMedia');
         Route::post('products/change-status', [ProductController::class, 'changeStatus'])->name('change.product.status');

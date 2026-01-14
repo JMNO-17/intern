@@ -26,7 +26,7 @@ class SettingSeeder extends Seeder
             [
                 'key'           => 'site_name',
                 'display_name'  => 'Site Name',
-                'value'         => 'Admin Dashboard',
+                'value'         => 'Z.com Myanmar',
             ],
             [
                 'key'           => 'site_description',
@@ -146,6 +146,7 @@ class SettingSeeder extends Seeder
                 'display_name'  => 'Useful Link D',
                 'value'         => 'https://www.google.com/',
             ],
+
         ];
 
         Setting::insert($settings);

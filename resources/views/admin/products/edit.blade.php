@@ -13,27 +13,27 @@
                         </div>
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                             <div class="sm:col-span-3">
-                                <label for="category_id" class="block text-sm/6 font-medium text-gray-900 required">
-                                    {{ __('labels.product.fields.category_id') }} ({{ __('labels.category.fields.name') }})
+                                <label for="section_id" class="block text-sm/6 font-medium text-gray-900 required">
+                                    {{ __('labels.product.fields.section_id') }} ({{ __('labels.service.fields.name') }})
                                 </label>
                                 <div class="mt-2">
-                                    <select id="category_id" name="category_id" required
+                                    <select id="section_id" name="section_id" required
                                         class="form-input block w-full rounded-md border-gray-300 focus:border-[var(--default-background)] focus:ring focus:ring-[var(--default-background)] focus:ring-opacity-50 sm:text-sm">
-                                        <option value="">{{ __('labels.product.fields.category_id') }}</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}"
-                                                {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
-                                                {{ $category->name }}
-                                                @if(optional($category->menu)->name)
-                                                    ({{ $category->menu->name }})
+                                        <option value="">{{ __('labels.product.fields.section_id') }}</option>
+                                        @foreach ($categories as $service)
+                                            <option value="{{ $service->id }}"
+                                                {{ old('section_id', $product->section_id) == $service->id ? 'selected' : '' }}>
+                                                {{ $service->name }}
+                                                @if(optional($service->menu)->name)
+                                                    ({{ $service->menu->name }})
                                                 @endif
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
-                                @if ($errors->has('category_id'))
+                                @if ($errors->has('section_id'))
                                     @include('admin.common.validation-error', [
-                                        'field' => 'category_id',
+                                        'field' => 'section_id',
                                         'errors' => $errors,
                                     ])
                                 @endif
@@ -54,61 +54,14 @@
                                 @endif
                             </div>
 
-                            {{-- <div class="sm:col-span-3">
-                                <label for="slug" class="block text-sm/6 font-medium text-gray-900 required">
-                                    {{ __('labels.product.fields.slug') }}
-                                </label>
-                                <div class="mt-2">
-                                    <input type="text" name="slug" id="slug" value="{{ old('slug', $product->slug) }}" autocomplete="given-slug"
-                                        class="form-input block w-full rounded-md border-gray-300 focus:border-[var(--default-background)] focus:ring focus:ring-[var(--default-background)] focus:ring-opacity-50 sm:text-sm">
-                                </div>
-                                @if ($errors->has('slug'))
-                                    @include('admin.common.validation-error', [
-                                        'field' => 'slug',
-                                        'errors' => $errors,
-                                    ])
-                                @endif
-                            </div> --}}
+                           
 
-                            <div class="sm:col-span-3">
-                                <label for="price" class="block text-sm/6 font-medium text-gray-900 required">
-                                    {{ __('labels.product.fields.price') }}
-                                </label>
-                                <div class="mt-2">
-                                    <input type="number" name="price" id="price" value="{{ old('price', $product->price) }}" autocomplete="given-price" required
-                                        class="form-input block w-full rounded-md border-gray-300 focus:border-[var(--default-background)] focus:ring focus:ring-[var(--default-background)] focus:ring-opacity-50 sm:text-sm" step="0.01" min="0">
-                                </div>
-                                @if ($errors->has('price'))
-                                    @include('admin.common.validation-error', [
-                                        'field' => 'price',
-                                        'errors' => $errors,
-                                    ])
-                                @endif
-                            </div>
+                           
                         </div>
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            <div class="sm:col-span-full">
-                                <label for="description" class="block text-sm/6 font-medium text-gray-900 required">
-                                    {{ __('labels.product.fields.description') }}
-                                </label>
-                                {{-- <div class="mt-2">
-                                    <textarea name="description" id="description" autocomplete="given-description" required
-                                        class="form-input block w-full rounded-md border-gray-300 focus:border-[var(--default-background)] focus:ring focus:ring-[var(--default-background)] focus:ring-opacity-50 sm:text-sm">{{ old('description', $product->description) }}
-                                    </textarea>
-                                </div> --}}
-                                <div class="mt-2">
-                                    <div id="description-area" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm">{!! old('description', $product->description) !!}</div>
-                                    <textarea id="description" name="description" hidden>{{ old('description', $product->description) }}</textarea>
-                                </div>
-                                @if ($errors->has('description'))
-                                    @include('admin.common.validation-error', [
-                                        'field' => 'description',
-                                        'errors' => $errors,
-                                    ])
-                                @endif
-                            </div>
+                            
 
-                            <div class="sm:col-span-full">
+                            {{-- <div class="sm:col-span-full">
                                 <div class="col-span-full">
                                     <label for="featured_image" class="block text-sm font-medium text-gray-900">
                                         {{ __('labels.product.fields.featured_image') }}
@@ -123,7 +76,7 @@
                                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="sm:col-span-full">
                                 <div class="col-span-full">
@@ -310,38 +263,7 @@
             });
         }
 
-        // Quill Editor Initialization
-
-          if (document.getElementById('description')) {
-            var editor = new Quill('#description-area', {
-                theme: 'snow',
-                modules: {
-                    toolbar: [
-                        [{ header: [1, 2, 3, false] }],
-                        ['bold', 'italic', 'underline', 'strike'],
-                        [{ align: ['right', 'center', 'justify'] }],
-                        [{ color: ['#000000', '#ff0000', '#00ff00'] }],
-                        ['image'],
-                        [{ list: 'ordered' }, { list: 'bullet' }],
-                        ['clean']
-                    ]
-                }
-            });
-
-            var description = document.getElementById('description');
-
-            // Initial sync from the editor content into the hidden textarea
-            description.value = editor.root.innerHTML;
-
-            editor.on('text-change', function() {
-                description.value = editor.root.innerHTML;
-            });
-
-            // Ensure textarea is updated on form submit (safety)
-            document.querySelector('form').addEventListener('submit', function() {
-                description.value = editor.root.innerHTML;
-            });
-        }
+       
 
     </script>
 @endsection

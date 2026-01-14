@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Helpers\common;
-use App\Models\Category;
+use App\Models\section;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Support\Arr;
@@ -22,7 +22,7 @@ class ProductController extends Controller
     public function __construct(ProductRepositoryInterface $productRepository)
     {
         $this->productRepository = $productRepository;
-        $this->categories = Category::all();
+        $this->categories = section::all();
     }
 
     public function index()
@@ -44,7 +44,7 @@ class ProductController extends Controller
         // $request->validate([
         //     'name' => 'required|string|max:255',
         //     'price' => 'required|numeric|min:0',
-        //     'category_id' => 'required|exists:categories,id',
+        //     'section_id' => 'required|exists:categories,id',
         // ]);
 
 
@@ -56,7 +56,7 @@ class ProductController extends Controller
     {
         abort_if(Gate::denies('product_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $fields = Arr::except($product->getAttributes(), ['id', 'deleted_at', 'created_at', 'updated_at']);
-        $fields['category_id'] = optional($product->category)->name;
+        $fields['section_id'] = optional($product->section)->name;
         $redirect_route = route('admin.products.index');
         $label = 'product';
         $images = $product->getMedia('featured_image');

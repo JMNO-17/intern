@@ -6,16 +6,16 @@
             <div class="sm:flex sm:items-center">
                 <div class="sm:flex-auto">
                     <div class="text-base font-semibold text-gray-900">
-                        {{__('labels.category.title')}}
+                        {{__('labels.service.title')}}
                     </div>
-                    <p class="mt-2 text-sm text-gray-700">{{__('labels.category.description')}}</p>
+                    <p class="mt-2 text-sm text-gray-700">{{__('labels.service.description')}}</p>
                 </div>
-                 @can('category_create')
+                 @can('service_create')
                         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                             <a href="{{ route('admin.categories.create') }}"
                                 class="block rounded-md custom-bg px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                 {{ __('global.add') }}
-                                {{ __('labels.category.title_singular') }}
+                                {{ __('labels.service.title_singular') }}
 
                             </a>
                         </div>
@@ -30,16 +30,16 @@
                         ])
                     @endif
                 @endforeach
-                <table id="category-table"
+                <table id="service-table"
                 class="min-w-full divide-y divide-gray-200 border border-gray-200 rounded-lg text-sm text-left text-gray-700">
                     <thead class="bg-gray-50">
                         <tr>
                             <th scope="col" class="px-6 py-3 font-semibold">{{__('global.no')}}</th>
                             {{-- <th scope="col" class="px-6 py-3 font-semibold">
-                                    {{ __('labels.category.fields.section_id') }} ({{ __('labels.section.fields.menu_id') }})
+                                    {{ __('labels.service.fields.section_id') }} ({{ __('labels.section.fields.menu_id') }})
                             </th> --}}
                             <th scope="col" class="px-6 py-3 font-semibold">
-                                {{__('labels.category.fields.name')}}
+                                {{__('labels.service.fields.name')}}
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 <span class="sr-only">{{__('global.action')}}</span>
@@ -47,31 +47,31 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100 bg-white">
-                        @foreach ($categories as $category)
+                        @foreach ($categories as $service)
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 font-medium text-gray-900">
                                     {{ $loop->iteration ?? '' }}
                                 </td>
                                 {{-- <td class="px-6 py-4">
-                                    {{ $category->section->name ?? '' }}
-                                    {{ $category->section->menu->name ?? '' }}
+                                    {{ $service->section->name ?? '' }}
+                                    {{ $service->section->menu->name ?? '' }}
                                 </td> --}}
                                 <td class="px-6 py-4">
-                                    {{ $category->name }}
+                                    {{ $service->name }}
                                 </td>
                                 <td class="px-6 py-4 flex items-center justify-end gap-2">
-                                    @can('category_access')
-                                        <a href="{{ route('admin.categories.show', $category) }}" class="custom-color">
+                                    @can('service_access')
+                                        <a href="{{ route('admin.categories.show', $service) }}" class="custom-color">
                                              <i class="fa-solid fa-eye"></i>
                                         </a>
                                     @endcan
-                                    @can('category_edit')
-                                        <a href="{{ route('admin.categories.edit', $category) }}" class="custom-color">
+                                    @can('service_edit')
+                                        <a href="{{ route('admin.categories.edit', $service) }}" class="custom-color">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                     @endcan
-                                    @can('category_delete')
-                                        <x-admin.delete-popup :id="$category->id" :action="route('admin.categories.destroy', $category->id)" :isDestroy="true">
+                                    @can('service_delete')
+                                        <x-admin.delete-popup :id="$service->id" :action="route('admin.categories.destroy', $service->id)" :isDestroy="true">
                                             <button type="submit"
                                             class="text-gray-600 hover:text-red-600 px-2 cursor-pointer" title="Delete">
                                             <i class="fa-solid fa-trash"></i>
@@ -91,8 +91,8 @@
 @section('scripts')
     @parent
     <script>
-        if (document.getElementById("category-table") && typeof simpleDatatables.DataTable !== 'undefined') {
-            const dataTable = new simpleDatatables.DataTable("#category-table", {
+        if (document.getElementById("service-table") && typeof simpleDatatables.DataTable !== 'undefined') {
+            const dataTable = new simpleDatatables.DataTable("#service-table", {
                 searchable: true,
                 sortable: true,
                 perPage: 10,

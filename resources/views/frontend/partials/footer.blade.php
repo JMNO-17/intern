@@ -1,20 +1,20 @@
-<div class="bg-white border-t border-gray-200">
+<div class="bg-base2 border-t border-gray-200">
     <!-- Main Footer -->
     <div class="py-10 px-5 lg:px-20">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
             <!-- Logo + Description -->
-            <div class="space-y-4">
+            {{-- <div class="space-y-4">
                 <a href="/" aria-label="Go to Home">
                     <img src="{{ $settings['site_logo'] }}" alt="AVATR Logo" class="h-[117px] w-[120px]">
                 </a>
                 <div class="lg:text-lg font-bold leading-relaxed py-3">
                     {{ app()->getLocale() == 'en' ? $settings['site_description'] : (app()->getLocale() == 'mm' ? $settings['site_description_mm'] : $settings['site_description_cn']) }}
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Other + Product + Social Media -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:text-end">
+            {{-- <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:text-end">
                 <!-- Other -->
                 <div>
                     <div class="text-gray-600 text-lg font-semibold mb-3">{{ __('labels.footer.others') }}</div>
@@ -59,13 +59,60 @@
                         </div>
                     </div>
                 </div>
+            </div> --}}
+
+
+            {{-- Contact details --}}
+
+            <div>
+                <ul class="space-y-3 text-gray-800">
+                    <!-- Address -->
+                    <li class="flex items-center gap-3">
+                        <span class="flex items-center justify-center w-9 h-9 text-gray-600">
+                         <i class="fa-solid fa-house"></i>
+                        </span>
+
+                        <a href="https://www.google.com/maps/search/{{ urlencode($settings['address']) }}"
+                        target="_blank"
+                        class="transition hover:text-white hover:bg-black hover:px-3 hover:py-1 hover:rounded-lg">
+                            {{ $settings['address'] }}
+                        </a>
+                    </li>
+
+                    <!-- Email -->
+                    <li class="flex items-center gap-3">
+                        <span class="flex items-center justify-center w-9 h-9 text-gray-600">
+                          <i class="fa-regular fa-envelope-open"></i>
+                        </span>
+
+                        <a href="mailto:{{ $settings['email'] }}"
+                        class="transition hover:text-white hover:bg-black hover:px-3 hover:py-1 hover:rounded-lg">
+                            {{ $settings['email'] }}
+                        </a>
+                    </li>
+
+                    <!-- Phone -->
+                    <li class="flex items-center gap-3">
+                        <span class="flex items-center justify-center w-9 h-9 text-gray-600">
+                          <i class="fa-solid fa-phone-volume"></i>
+                        </span>
+
+                        <a href="tel:{{ $settings['phone'] }}"
+                        class="transition hover:text-white hover:bg-black hover:px-3 hover:py-1 hover:rounded-lg">
+                            {{ $settings['phone'] }}
+                        </a>
+                    </li>
+                </ul>
+
             </div>
+
         </div>
     </div>
 
     <!-- Copyright -->
-    <div class="py-5 px-5 lg:px-20 border-gray-200 text-center justify-center text-white bg-black">
-        © {{ __('labels.footer.developed_year') }} {{ $settings['site_name'] }}. {{ __('labels.footer.all_rights_reserved') }}.
+    <div class="py-5 px-5 lg:px-20 border-gray-200 text-center justify-center text-white bg-base3">
+        © {{ __('labels.footer.developed_year') }} Build in Design.  {{ __('labels.footer.all_rights_reserved') }}.
+        <br/> Designed by {{ $settings['site_name'] }}.
     </div>
 
 </div>
