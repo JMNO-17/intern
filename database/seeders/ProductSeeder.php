@@ -42,6 +42,17 @@ class ProductSeeder extends Seeder
             
         ];
 
+        $payload = [];
+        foreach ($products as $p) {
+            $payload[] = [
+                'name' => $p['name'],
+                'slug' => $p['slug'],
+                'section_id' => $p['section_id'] ?? null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
+
         Product::insert($products);
     }
 }

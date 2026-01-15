@@ -4,9 +4,14 @@ namespace App\Models;
 
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\ImageTrait;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\HasMedia;
 
-class Section extends Model
+class Section extends Model implements HasMedia
 {
+
+   use ImageTrait, InteractsWithMedia;
 
     protected $dates = [
         'created_at',
@@ -30,10 +35,21 @@ class Section extends Model
         return $this->belongsTo(Menu::class);
     }
 
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
+
     public function content_descriptions()
     {
         return $this->hasMany(ContentDescription::class);
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
 
     public function about()
     {
@@ -57,4 +73,15 @@ class Section extends Model
 
         return $modules;
     }
+
+    public function registerMediaCollections(): void
+    {
+         $this->addMediaCollection('featured_image')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/gif', 'image/webp']);
+            
+        $this->addMediaCollection('other_images')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png','image/jpg', 'image/webp']);
+    }
+
+    
 }

@@ -24,6 +24,7 @@ class UpdateServiceRequest extends FormRequest
     {
         $rules = [
             'name' => 'required|string|max:255',
+            'section_id' => 'required|exists:sections,id',
         ];
 
         return $rules;

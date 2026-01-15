@@ -90,10 +90,10 @@
 
                                         @can('service_access')
                                             <li>
-                                                <a href="{{ route('admin.categories.index') }}"
+                                                <a href="{{ route('admin.services.index') }}"
                                                     aria-label="{{ __('labels.service.title') }}"
                                                     class="group flex items-center gap-x-3 rounded-md p-2 text-sm font-semibold
-                                                    {{ request()->routeIs('admin.categories.*') ? 'custom-bg text-white ' : 'text-black' }}">
+                                                    {{ request()->routeIs('admin.services.*') ? 'custom-bg text-white ' : 'text-black' }}">
                                                     <i
                                                         class="flex-shrink-0 w-6 h-6 fas fa-tags"></i><span>{{ __('labels.service.title') }}</span>
                                                 </a>
@@ -112,7 +112,7 @@
                                             </li>
                                         @endcan
 
-                                        @can('contentdescription_access')
+                                        {{-- @can('contentdescription_access')
                                             <li>
                                                 <a href="{{ route('admin.contentdescriptions.index') }}"
                                                     aria-label="{{ __('labels.contentdescription.title') }}"
@@ -122,7 +122,7 @@
                                                         class="flex-shrink-0 w-6 h-6 fas fa-file-alt"></i><span>{{ __('labels.contentdescription.title') }}</span>
                                                 </a>
                                             </li>
-                                        @endcan
+                                        @endcan --}}
                                     </div>
                                 </template>
 
@@ -270,7 +270,7 @@
                                     </li>
                                 @endcan
 
-                                @can('contentdescription_access')
+                                {{-- @can('contentdescription_access')
                                     <li>
                                         <a href="{{ route('admin.contentdescriptions.index') }}"
                                             aria-label="{{ __('labels.contentdescription.title') }}"
@@ -280,14 +280,14 @@
                                                 class="flex-shrink-0 w-6 h-6 fas fa-file-alt"></i><span>{{ __('labels.contentdescription.title') }}</span>
                                         </a>
                                     </li>
-                                @endcan
+                                @endcan --}}
 
                                 @can('service_access')
                                     <li>
-                                        <a href="{{ route('admin.categories.index') }}"
+                                        <a href="{{ route('admin.services.index') }}"
                                             aria-label="{{ __('labels.service.title') }}"
                                             class="group flex items-center gap-x-3 rounded-md p-2 text-sm font-semibold
-                                            {{ request()->routeIs('admin.categories.*') ? 'custom-bg text-white ' : 'text-black' }}">
+                                            {{ request()->routeIs('admin.services.*') ? 'custom-bg text-white ' : 'text-black' }}">
                                             <i
                                                 class="flex-shrink-0 w-6 h-6 fas fa-tags"></i><span>{{ __('labels.service.title') }}</span>
                                         </a>

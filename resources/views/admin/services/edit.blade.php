@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="px-4 sm:px-6 lg:px-8">
-        <form action="{{ route('admin.categories.update', $service) }}" method="POST" enctype="multipart/form-data"
+        <form action="{{ route('admin.services.update', $service) }}" method="POST" enctype="multipart/form-data"
             class="bg-white shadow-xs ring-1 ring-gray-900/5 sm:rounded-xl my-4 md:my-8">
             @method('PUT')
             @csrf
@@ -12,7 +12,7 @@
                             {{ trans('global.edit') }} {{ __('labels.service.title_singular') }}
                         </div>
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            {{-- <div class="sm:col-span-3">
+                            <div class="sm:col-span-3">
                                 <label for="section_id" class="block text-sm/6 font-medium text-gray-900 required">
                                     {{ __('labels.service.fields.section_id') }}
                                     ({{ __('labels.section.fields.menu_id') }})
@@ -35,7 +35,7 @@
                                         'errors' => $errors,
                                     ])
                                 @endif
-                            </div> --}}
+                            </div>
                             <div class="sm:col-span-3">
                                 <label for="name" class="block text-sm/6 font-medium text-gray-900 required">
                                     {{ __('labels.service.fields.name') }}
@@ -98,7 +98,7 @@
                         class="rounded-md custom-bg px-3 py-2 text-sm font-semibold text-white shadow-xs cursor-pointer hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                         {{ __('global.update') }}
                     </button>
-                    <a href="{{ route('admin.categories.index') }}"
+                    <a href="{{ route('admin.services.index') }}"
                         class="text-sm rounded-md hover:outline font-semibold custom-color px-4 py-2 cursor-pointer">
                         {{ __('global.cancel') }}
                     </a>
@@ -112,7 +112,7 @@
      <script>
         var uploadedDocumentMap = {}
         Dropzone.options.serviceImageDropzone = {
-            url: '{{ route('admin.categories.storeMedia') }}',
+            url: '{{ route('admin.services.storeMedia') }}',
             maxFilesize: 2, // MB
             maxFiles: 5,
             addRemoveLinks: true,
@@ -174,7 +174,7 @@
         function removeMedia(file_name, type) {
             $.ajax({
                 type: 'POST',
-                url: '{{ route('admin.categories.removeMedia') }}',
+                url: '{{ route('admin.services.removeMedia') }}',
                 data: {
                     'file_name': file_name,
                     'type': type,

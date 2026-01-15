@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Helpers\common;
-use App\Models\section;
+use App\Models\Section;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Support\Arr;
@@ -18,11 +18,11 @@ use App\Repositories\Interfaces\ProductRepositoryInterface;
 class ProductController extends Controller
 {
     public $productRepository;
-    public $categories;
+    public $sections;
     public function __construct(ProductRepositoryInterface $productRepository)
     {
         $this->productRepository = $productRepository;
-        $this->categories = section::all();
+        $this->sections = Section::all();
     }
 
     public function index()
@@ -35,8 +35,8 @@ class ProductController extends Controller
     public function create()
     {
         abort_if(Gate::denies('product_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $categories =$this->categories;
-        return view('admin.products.create', compact('categories'));
+        $sections =$this->sections;
+        return view('admin.products.create', compact('sections'));
     }
 
     public function store(StoreProductRequest $request)
@@ -44,7 +44,7 @@ class ProductController extends Controller
         // $request->validate([
         //     'name' => 'required|string|max:255',
         //     'price' => 'required|numeric|min:0',
-        //     'section_id' => 'required|exists:categories,id',
+        //     'section_id' => 'required|exists:sections,id',
         // ]);
 
 
@@ -74,8 +74,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         abort_if(Gate::denies('product_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $categories =$this->categories;
-        return view('admin.products.edit', compact('product', 'categories'));
+        $sections =$this->sections;
+        return view('admin.products.edit', compact('product', 'sections'));
     }
 
     public function update(UpdateProductRequest $request, Product $product)

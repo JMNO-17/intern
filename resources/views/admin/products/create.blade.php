@@ -31,7 +31,7 @@
                                     <select name="section_id" id="section_id" required
                                         class="form-input block w-full rounded-md border-gray-300 focus:border-[var(--default-background)] focus:ring focus:ring-[var(--default-background)] focus:ring-opacity-50 sm:text-sm">
                                         <option value="">{{ __('labels.product.fields.section_id') }}</option>
-                                        @foreach ($categories as $section)
+                                        @foreach ($sections as $section)
                                             <option value="{{ $section->id }}"
                                                 {{ old('section_id') == $section->id ? 'selected' : '' }}>
                                                 {{ $section->name }}
@@ -73,7 +73,7 @@
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
                            
-                            {{-- <div class="sm:col-span-full">
+                            <div class="sm:col-span-full">
                                 <div class="col-span-full">
                                     <label for="featured_image" class="block text-sm font-medium text-gray-900">
                                         {{ __('labels.product.fields.featured_image') }}
@@ -88,7 +88,7 @@
                                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
-                            </div> --}}
+                            </div>
 
                             <div class="sm:col-span-full">
                                 <div class="col-span-full">

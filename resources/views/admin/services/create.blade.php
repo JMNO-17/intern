@@ -1,16 +1,16 @@
 @extends('layouts.admin')
 @section('content')
     <div class="px-4 sm:px-6 lg:px-8">
-        <form action="{{ route('admin.categories.store') }}" method="POST" enctype="multipart/form-data" class="bg-white showdow-xs ring-1 ring-gray-900/5 sm:rounded-xl my-4 md:my-8">
+        <form action="{{ route('admin.services.store') }}" method="POST" enctype="multipart/form-data" class="bg-white showdow-xs ring-1 ring-gray-900/5 sm:rounded-xl my-4 md:my-8">
             @csrf
             <div class="px-4 py-6 sm:p-8">
                 <div class="space-y-12">
-                    @if ($errors->has('categories'))
+                    @if ($errors->has('services'))
                     <div class="rounded-md bg-red-50 p-4 mt-3">
                         <div class="flex">
                             <div class="ml-3">
                                 <h3 class="text-sm font-medium text-red-800">
-                                    {{ $errors->first('categories')}}
+                                    {{ $errors->first('services')}}
                                 </h3>
                             </div>
                         </div>
@@ -22,7 +22,7 @@
                             {{ __('labels.service.title_singular') }}
                         </div>
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            {{-- <div class="sm:col-span-3">
+                            <div class="sm:col-span-3">
                                 <label for="section_id" class="block text-sm/6 font-medium text-gray-900 required">
                                     {{ __('labels.service.fields.section_id') }} ({{ __('labels.section.fields.menu_id') }})
                                 </label>
@@ -43,7 +43,7 @@
                                         'errors' => $errors,
                                     ])
                                 @endif
-                            </div> --}}
+                            </div>
                             <div class="sm:col-span-3">
                                 <label for="name" class="block text-sm/6 font-medium text-gray-900 required">
                                     {{ __('labels.service.fields.name')}}
@@ -102,7 +102,7 @@
                     class="rounded-md custom-bg px-3 py-2 text-sm font-semibold text-white shadow-xs cursor-pointer hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     {{ __('global.create')}}
                 </button>
-                <a href="{{ route('admin.categories.index')}}" class="text-sm py-2 px-4 hover:outline rounded-md font-semibold custom-color sursor-pointer">
+                <a href="{{ route('admin.services.index')}}" class="text-sm py-2 px-4 hover:outline rounded-md font-semibold custom-color sursor-pointer">
                     {{ __('global.cancel') }}
                 </a>
                 </div>
@@ -113,7 +113,7 @@
     <script>
         var uploadedDocumentMap = {}
         Dropzone.options.serviceImageDropzone = {
-            url: '{{ route('admin.categories.storeMedia') }}',
+            url: '{{ route('admin.services.storeMedia') }}',
             maxFilesize: 2, // MB
             maxFiles: 5,
             addRemoveLinks: true,

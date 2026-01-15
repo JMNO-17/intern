@@ -14,18 +14,18 @@
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                             <div class="sm:col-span-3">
                                 <label for="section_id" class="block text-sm/6 font-medium text-gray-900 required">
-                                    {{ __('labels.product.fields.section_id') }} ({{ __('labels.service.fields.name') }})
+                                    {{ __('labels.product.fields.section_id') }} ({{ __('labels.section.fields.name') }})
                                 </label>
                                 <div class="mt-2">
                                     <select id="section_id" name="section_id" required
                                         class="form-input block w-full rounded-md border-gray-300 focus:border-[var(--default-background)] focus:ring focus:ring-[var(--default-background)] focus:ring-opacity-50 sm:text-sm">
                                         <option value="">{{ __('labels.product.fields.section_id') }}</option>
-                                        @foreach ($categories as $service)
-                                            <option value="{{ $service->id }}"
-                                                {{ old('section_id', $product->section_id) == $service->id ? 'selected' : '' }}>
-                                                {{ $service->name }}
-                                                @if(optional($service->menu)->name)
-                                                    ({{ $service->menu->name }})
+                                        @foreach ($sections as $section)
+                                            <option value="{{ $section->id }}"
+                                                {{ old('section_id', $product->section_id) == $section->id ? 'selected' : '' }}>
+                                                {{ $section->name }}
+                                                @if(optional($section->menu)->name)
+                                                    ({{ $section->menu->name }})
                                                 @endif
                                             </option>
                                         @endforeach
@@ -61,7 +61,7 @@
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                             
 
-                            {{-- <div class="sm:col-span-full">
+                            <div class="sm:col-span-full">
                                 <div class="col-span-full">
                                     <label for="featured_image" class="block text-sm font-medium text-gray-900">
                                         {{ __('labels.product.fields.featured_image') }}
@@ -76,7 +76,7 @@
                                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
-                            </div> --}}
+                            </div>
 
                             <div class="sm:col-span-full">
                                 <div class="col-span-full">

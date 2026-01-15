@@ -33,9 +33,9 @@ Route::group(
         Route::post('abouts/storeMedia', [AboutController::class, 'storeMedia'])->name('abouts.storeMedia');
         Route::post('abouts/removeMedia', [AboutController::class, 'removeMedia'])->name('abouts.removeMedia');
         Route::resource('abouts', AboutController::class);
-        Route::post('categories/storeMedia', [ServiceController::class, 'storeMedia'])->name('categories.storeMedia');
-        Route::post('categories/removeMedia', [ServiceController::class, 'removeMedia'])->name('categories.removeMedia');
-        Route::resource('categories', ServiceController::class);
+        Route::post('services/storeMedia', [ServiceController::class, 'storeMedia'])->name('services.storeMedia');
+        Route::post('services/removeMedia', [ServiceController::class, 'removeMedia'])->name('services.removeMedia');
+        Route::resource('services', ServiceController::class);
         Route::post('products/storeMedia', [ProductController::class, 'storeMedia'])->name('products.storeMedia');
         Route::post('products/removeMedia', [ProductController::class, 'removeMedia'])->name('products.removeMedia');
         Route::post('products/change-status', [ProductController::class, 'changeStatus'])->name('change.product.status');

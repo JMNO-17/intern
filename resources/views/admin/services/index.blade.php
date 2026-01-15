@@ -12,7 +12,7 @@
                 </div>
                  @can('service_create')
                         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-                            <a href="{{ route('admin.categories.create') }}"
+                            <a href="{{ route('admin.services.create') }}"
                                 class="block rounded-md custom-bg px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                 {{ __('global.add') }}
                                 {{ __('labels.service.title_singular') }}
@@ -35,9 +35,11 @@
                     <thead class="bg-gray-50">
                         <tr>
                             <th scope="col" class="px-6 py-3 font-semibold">{{__('global.no')}}</th>
-                            {{-- <th scope="col" class="px-6 py-3 font-semibold">
-                                    {{ __('labels.service.fields.section_id') }} ({{ __('labels.section.fields.menu_id') }})
-                            </th> --}}
+                            <th scope="col" class="px-6 py-3 font-semibold">
+                                    {{ __('labels.service.fields.section_id') }} 
+                                   
+                                    ({{ __('labels.section.fields.menu_id') }})
+                            </th>
                             <th scope="col" class="px-6 py-3 font-semibold">
                                 {{__('labels.service.fields.name')}}
                             </th>
@@ -47,31 +49,31 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100 bg-white">
-                        @foreach ($categories as $service)
+                        @foreach ($services as $service)
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 font-medium text-gray-900">
                                     {{ $loop->iteration ?? '' }}
                                 </td>
-                                {{-- <td class="px-6 py-4">
+                                <td class="px-6 py-4">
                                     {{ $service->section->name ?? '' }}
-                                    {{ $service->section->menu->name ?? '' }}
-                                </td> --}}
+                                    {{-- {{ $service->section->menu->name ?? '' }} --}}
+                                </td>
                                 <td class="px-6 py-4">
                                     {{ $service->name }}
                                 </td>
                                 <td class="px-6 py-4 flex items-center justify-end gap-2">
                                     @can('service_access')
-                                        <a href="{{ route('admin.categories.show', $service) }}" class="custom-color">
+                                        <a href="{{ route('admin.services.show', $service) }}" class="custom-color">
                                              <i class="fa-solid fa-eye"></i>
                                         </a>
                                     @endcan
                                     @can('service_edit')
-                                        <a href="{{ route('admin.categories.edit', $service) }}" class="custom-color">
+                                        <a href="{{ route('admin.services.edit', $service) }}" class="custom-color">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                     @endcan
                                     @can('service_delete')
-                                        <x-admin.delete-popup :id="$service->id" :action="route('admin.categories.destroy', $service->id)" :isDestroy="true">
+                                        <x-admin.delete-popup :id="$service->id" :action="route('admin.services.destroy', $service->id)" :isDestroy="true">
                                             <button type="submit"
                                             class="text-gray-600 hover:text-red-600 px-2 cursor-pointer" title="Delete">
                                             <i class="fa-solid fa-trash"></i>

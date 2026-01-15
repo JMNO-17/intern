@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use Exception;
 use App\Models\Service;
+use App\Models\Section;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;

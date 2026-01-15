@@ -21,9 +21,11 @@ class ServiceController extends Controller
      * Display a listing of the resource.
      */
     public $serviceRepository;
+    public $sections;
     public function __construct(ServiceRepositoryInterface $serviceRepository)
     {
         $this->serviceRepository = $serviceRepository;
+        $this->sections = Section::all();
 
     }
     public function index()
@@ -40,8 +42,8 @@ class ServiceController extends Controller
     public function create()
     {
         abort_if(Gate::denies('service_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        // $sections = $this->sections;
-        return view('admin.services.create');
+        $sections = $this->sections;
+        return view('admin.services.create', compact('sections'));
     }
 
     /**
@@ -78,8 +80,8 @@ class ServiceController extends Controller
     {
         // dd($service);
         abort_if(Gate::denies('service_edit'),Response::HTTP_FORBIDDEN, '403 Forbidden');
-        // $sections = $this->sections;
-        return view('admin.services.edit', compact('service'));
+        $sections = $this->sections;
+        return view('admin.services.edit', compact('service', 'sections'));
     }
 
     /**

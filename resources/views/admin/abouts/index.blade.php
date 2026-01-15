@@ -54,7 +54,7 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $about->section->name ?? '' }}
-                                        ({{ $about->section->menu->name ?? '' }})
+                                        {{-- ({{ $about->section->menu->name ?? '' }}) --}}
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $about->name }}

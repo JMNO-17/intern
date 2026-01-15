@@ -16,34 +16,50 @@ class ServiceSeeder extends Seeder
     {
         $services = [
             [
+                'section_id'        => 9,
                 'name'              => 'Air Conditioning Services',
-                'description'       => 'Indoor & Outdoor Unit Installation. Indoor & Outdoor Unit Repair and Maintenance',
-                'section_name'      => 'Aircon',
+               'description' => '
+                <ul class="list-disc list-inside">
+                    <li>Indoor & Outdoor Unit Installation</li>
+                    <li>Indoor & Outdoor Unit Repair and Maintenance</li>
+                </ul>',
             ],
             [
+                'section_id'        => 9,
                 'name'              => 'TV & Antenna Services',
-                'description'       => 'TV Installation and Setup .Antenna Installation and Alignment .TV and Antenna Repair Services',
-                'section_name'      => 'TV & Antenna ',
+                'description'       => 
+                '<ul class="list-disc list-inside">
+                    <li>TV Installation and Setup.</li>
+                    <li>Antenna Installation and Alignment.</li>
+                    <li> TV and Antenna Repair Services.</li>
+                </ul>',
             ],
             [
+                'section_id'        => 9,
                 'name'              => 'Refrigerator Services',
-                'description'       => 'Refrigerator Installation. Refrigerator Repair and Maintenance.',
-                'section_name'      => 'Refrigerator',
+                'description'       => '<ul class="list-disc list-inside">
+                <li>Refrigerator Installation. </li>
+                <li>Refrigerator Repair and Maintenance.</li>
+                </ul>',
             ],
             [
+                'section_id'        => 9,
                 'name'              => 'Washing Machine Services',
-                'description'       => 'Washing Machine Installation. Washing Machine Repair and Maintenance.',
-                'section_name'      => 'Washing Machine',
+                'description'       => '<ul class="list-disc list-inside">
+                    <li> Washing Machine Installation.</li>
+                    <li>Washing Machine Repair and Maintenance.</li>
+                </ul>
+               ',
+               
             ]
         ];
 
         $payload = [];
         foreach ($services as $s) {
-            $section = Section::where('name', $s['section_name'])->first();
             $payload[] = [
                 'name' => $s['name'],
                 'description' => $s['description'],
-                'section_id' => $section ? $section->id : null,
+                'section_id' => $s['section_id'] ?? null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ];

@@ -36,17 +36,17 @@ class SettingSeeder extends Seeder
             [
                 'key'           => 'phone',
                 'display_name'  => 'Phone',
-                'value'         => '9599999999',
+                'value'         => '09770791678 ,09893392020 ',
             ],
             [
                 'key'           => 'email',
                 'display_name'  => 'Email',
-                'value'         => 'info@admin.com',
+                'value'         => 'linooelectronic@gmail.com',
             ],
             [
                 'key'           => 'address',
                 'display_name'  => 'Address',
-                'value'         => 'No. 123, Main Street, Yangon, Myanmar.',
+                'value'         => 'No.110,Thingaha street, Beside Park, Hleguu Township.',
             ],
             [
                 'key'           => 'seo_title',
@@ -100,7 +100,7 @@ class SettingSeeder extends Seeder
             [
                 'key'           => 'google_map',
                 'display_name'  => 'Google Map',
-                'value'         => '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3629.5734439855373!2d96.12592687492199!3d16.85064048394789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c195cdc4ca50eb%3A0xe7e36ba52060a7f0!2sGMO-Z.com%20ACE!5e1!3m2!1sen!2smm!4v1738576931222!5m2!1sen!2smm" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
+                'value'         => '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3818.511108688209!2d96.12626042492195!3d16.850592683947948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1952af70c1461%3A0x173ad4c3427759e1!2sMICT%20Park%2C%20Building%2018!5e0!3m2!1sen!2smm!4v1768468040283!5m2!1sen!2smm" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
             ],
 
             // quick links

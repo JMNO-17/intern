@@ -46,21 +46,21 @@ class ProductRepository implements ProductRepositoryInterface
         }
     }
 
-    public function update($data, $model)
+    public function update($data, $section)
     {
         try {
             DB::beginTransaction();
-            MediaUploadHelper::handleImageUpdate($model, $data, 'featured_image', 'product');
-            MediaUploadHelper::handleImageUpdate($model, $data, 'other_images', 'productOtherImages');
+            MediaUploadHelper::handleImageUpdate($section, $data, 'featured_image', 'product');
+            MediaUploadHelper::handleImageUpdate($section, $data, 'other_images', 'productOtherImages');
             // unset($data['featured_image'], $data['other_images']);
-            $model->update($data);
+            $section->update($data);
             DB::commit();
 
-            return $model;
+            return $section;
         } catch (Exception $e) {
             DB::rollBack();
             Log::error('Product update failed', [
-                'product_id' => $model->id,
+                'product_id' => $section->id,
                 'error' => $e->getMessage(),
             ]);
 
