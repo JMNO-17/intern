@@ -17,7 +17,7 @@
             {{-- <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:text-end">
                 <!-- Other -->
                 <div>
-                    <div class="text-gray-600 text-lg font-semibold mb-3">{{ __('labels.footer.others') }}</div>
+                    <div class="text-black text-lg font-semibold mb-3">{{ __('labels.footer.others') }}</div>
                     <ul class="space-y-2">
                         @php
                             $included = ['aboutus', 'contactus'];
@@ -30,7 +30,7 @@
 
                 <!-- Product -->
                 <div>
-                    <div class="text-gray-600 text-lg font-semibold mb-3">{{ __('labels.footer.products') }}</div>
+                    <div class="text-black text-lg font-semibold mb-3">{{ __('labels.footer.products') }}</div>
                     <ul class="space-y-2">
                         @php
                             $excluded = ['home', 'aboutus', 'contactus'];
@@ -43,7 +43,7 @@
 
                 <!-- Social Media -->
                 <div>
-                    <div class="text-gray-600 text-lg font-semibold mb-3">{{ __('labels.footer.social_media') }}</div>
+                    <div class="text-black text-lg font-semibold mb-3">{{ __('labels.footer.social_media') }}</div>
                     <div class="grid grid-cols-9 md:grid-cols-12 lg:grid-cols-3 gap-4">
                         <div class="lg:col-span-2">
                             <a href="{{ $settings['facebook'] }}" aria-label="Connect with Facebook" target="_blank" class="text-blue-600"><i class="fab fa-facebook text-2xl"></i></a>
@@ -64,11 +64,11 @@
 
             {{-- Contact details --}}
 
-            <div>
-                <ul class="space-y-3 text-gray-800">
+            <div id="contactus" class="w-full px-4 sm:px-6 lg:px-20 py-6 lg:py-8">
+                <ul class="space-y-3 text-black">
                     <!-- Address -->
                     <li class="flex items-center gap-3">
-                        <span class="flex items-center justify-center w-9 h-9 text-gray-600">
+                        <span class="flex items-center justify-center w-9 h-9 text-black">
                          <i class="fa-solid fa-house"></i>
                         </span>
 
@@ -81,7 +81,7 @@
 
                     <!-- Email -->
                     <li class="flex items-center gap-3">
-                        <span class="flex items-center justify-center w-9 h-9 text-gray-600">
+                        <span class="flex items-center justify-center w-9 h-9 text-black">
                           <i class="fa-regular fa-envelope-open"></i>
                         </span>
 
@@ -93,7 +93,7 @@
 
                     <!-- Phone -->
                     <li class="flex items-center gap-3">
-                        <span class="flex items-center justify-center w-9 h-9 text-gray-600">
+                        <span class="flex items-center justify-center w-9 h-9 text-black">
                           <i class="fa-solid fa-phone-volume"></i>
                         </span>
 

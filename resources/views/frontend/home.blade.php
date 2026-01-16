@@ -3,42 +3,60 @@
 @section('content')
 
     <!-- Hero -->
-    <section>
-        <img src="https://images.pexels.com/photos/885944/pexels-photo-885944.jpeg"
-            class="block w-full h-[400px] object-cover" />
+   <section id="home" class="w-full">
+    <img
+        src="https://images.pexels.com/photos/572056/pexels-photo-572056.jpeg"
+        alt=""
+        class="block w-full h-[250px] sm:h-[300px] md:h-[400px] object-cover"
+    >
     </section>
 
+
     <!-- About Section -->
-    <section>
-        <div class="max-w-7xl mx-auto py-8 px-4">
+    <section id="aboutus" class="bg-hero">
+        <div class="w-full px-4 sm:px-6 lg:px-20 py-6 lg:py-8">
 
             @php
                 $aboutUs = $abouts->firstWhere('name', 'About Us');
                 $aboutWhy = $abouts->firstWhere('name', 'Why Choose Lin Oo?');
             @endphp
 
-            <div class="space-y-10">
+            <div class="space-y-8 max-w-[1440px] mx-auto">
+
+                <!-- About Us -->
                 <div>
-                    <h2 class="text-2xl font-bold mb-3">
+                    <h2 class="text-xl sm:text-2xl font-bold mb-3">
                         {{ $aboutUs->name ?? 'About Us' }}
+                        <span>...</span>
                     </h2>
-                    <div class="text-gray-700">
+
+                    <div class="max-w-3xl text-black text-base sm:text-lg  leading-relaxed">
                         {!! $aboutUs->description ?? '' !!}
                     </div>
                 </div>
 
+                <!-- Why Choose -->
                 <div>
-                    <h2 class="text-2xl font-bold mb-3">
+                    <h2 class="text-xl sm:text-2xl font-bold mb-3">
                         {{ $aboutWhy->name ?? 'Why Choose Lin Oo?' }}
                     </h2>
-                    <div class="text-gray-700">
-                        {!! $aboutWhy->description ?? '' !!}
-                    </div>
-                </div>
-            </div>
 
+                    <div class="max-w-3xl text-black text-base sm:text-lg leading-relaxed py-2">
+                        <ul class="list-disc list-outside pl-5 space-y-2">
+                            {!! $aboutWhy->description ?? '' !!}
+                        </ul>
+                    </div>
+
+                    <p class="max-w-3xl text-black text-base sm:text-lg leading-relaxed mt-4">
+                        Established in 2018 in Yangon, Myanmar, Lin Oo has rapidly emerged
+                        as a leading provider of electronic services and maintenance...
+                    </p>
+                </div>
+
+            </div>
         </div>
     </section>
+
 
 
 
@@ -47,13 +65,13 @@
     <!-- Products Section -->
 
 
-    <section class="px-5 lg:px-20 py-8 bg-base2">
+    <section id="product" class="px-4 sm:px-6 lg:px-20 py-6 lg:py-8 bg-base2">
 
-        <h1 class="text-2xl font-bold mb-6">
+        <h1 class="text-xl sm:text-2xl font-bold mb-6">
             Our Products
         </h1>
 
-        <div class="flex gap-4 mb-8">
+       <div class="flex flex-wrap gap-2 justify-center mb-8 text-base md:text-lg">
             @foreach ($sections as $section)
                 <a href="{{ url()->current() }}?section_id={{ $section->id }}"
                     class="px-4 py-2 rounded
@@ -62,8 +80,6 @@
                 </a>
             @endforeach
         </div>
-
-
 
         @if ($products->count())
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -94,47 +110,53 @@
 
 
     {{-- Services Section --}}
-    <section class="px-5 lg:px-20 py-8 bg-base1">
-        <h1 class="text-2xl font-bold">
+    <section id="service" class="bg-base1 px-4 sm:px-6 lg:px-20 py-6 lg:py-8">
+        <h1 class="text-xl sm:text-2xl font-bold text-center">
             Services
         </h1>
-        <p class="py-2">
+
+        <p class="py-2 text-center max-w-2xl sm:text-lg mx-auto leading-relaxed">
             At Lin Oo, we offer a comprehensive range of electronic services to
             ensure your home and commercial systems operate at their best.
-            <br />
             Our services include:
         </p>
-        <div class="flex justify-center py-0 my-0 mx-0">
-            <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6 text-center ">
+
+        <div class="mt-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
                 @foreach ($services as $service)
                     <div
-                        class="p-2 border border-gray-1px rounded shadow hover:shadow-lg transition-shadow duration-300 bg-base3 w-[400px] h-[420px]">
+                        class="p-4 rounded shadow-lg hover:shadow-xl transition-shadow duration-300 bg-base3">
 
-                        {{-- SERVICE NAME --}}
-                        <h2 class="text-lg font-semibold py-2 font-[24px]">{{ $service->name }}</h2>
+                        <h2 class="text-lg font-semibold py-2">
+                            {{ $service->name }}
+                        </h2>
 
-                        {{-- SERVICE IMAGE --}}
                         @if ($service->getFirstMedia('service_image'))
-                            <img src="{{ $service->getFirstMediaUrl('service_image') }}"
-                                class="px-4 h-48 w-full object-cover rounded" alt="{{ $service->name }}">
+                            <img
+                                src="{{ $service->getFirstMediaUrl('service_image') }}"
+                                class="h-48 w-full object-cover rounded mb-4"
+                                alt="{{ $service->name }}"
+                            >
                         @endif
 
-                        {{-- SERVICE DESCRIPTION --}}
-                        <div class="text-black py-2 font-[16px]">
+                        <ul class="list-disc list-outside pl-6 space-y-2 text-black text-base leading-relaxed">
                             {!! $service->description !!}
-                        </div>
+                        </ul>
 
                     </div>
                 @endforeach
             </div>
         </div>
 
-        <p class="py-2">
-            Our skilled technicians are ready to provide prompt and reliable services to keep your electronics in top
-            condition.
+        <p class="py-4 text-center max-w-2xl sm:text-lg mx-auto leading-relaxed">
+            Our skilled technicians are ready to provide prompt and reliable services
+            to keep your electronics in top condition.
             Contact Lin Oo for all your electronic needs today!
         </p>
     </section>
+
+
+
 
 
 

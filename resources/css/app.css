@@ -31,6 +31,7 @@
     --background-image-blue-hover: linear-gradient(180deg, #00E0FF 0%, #00BFFF 50%, #009DFF 100%);
     --color-dark-gray: #313B45;
     --color-light-gray: #6B7280; */
+   
     --color-black: #000000;
     --color-base1: #F9F3E4;
     --color-base2: #F4EBD0;
@@ -39,8 +40,21 @@
 
 }
 
+:root {
+  --hero-bg: url('https://images.pexels.com/photos/572056/pexels-photo-572056.jpeg');
+}
+
+
+@layer utilities {
+  .bg-hero {
+    background-image: var(--hero-bg);
+    background-size: cover;
+    
+  }
+}
+
 body {
-    font-family: 'Times New Roman', 'Segoe UI', 'Arial', 'sans-serif';
+    font-family: 'Times New Roman';
     background-color: var(--color-base-1);
     color: var(--color-black);
     margin: 0;
@@ -65,7 +79,7 @@ body {
 }
 
 .font-space-grotesk {
-    font-family: 'Space Grotesk', 'Segoe UI', 'Arial', 'sans-serif';
+    font-family: 'Times New Roman','Space Grotesk', 'Segoe UI', 'Arial', 'sans-serif';
 }
 
 .custom-bg {

@@ -19,36 +19,34 @@ class ServiceSeeder extends Seeder
                 'section_id'        => 9,
                 'name'              => 'Air Conditioning Services',
                'description' => '
-                <ul class="list-disc list-inside">
-                    <li>Indoor & Outdoor Unit Installation</li>
-                    <li>Indoor & Outdoor Unit Repair and Maintenance</li>
-                </ul>',
+
+               <li>Indoor & Outdoor Unit Installation</li>
+                <li>Indoor & Outdoor Unit Repair and Maintenance</li>
+                ',
             ],
             [
                 'section_id'        => 9,
                 'name'              => 'TV & Antenna Services',
                 'description'       => 
-                '<ul class="list-disc list-inside">
+                '
                     <li>TV Installation and Setup.</li>
                     <li>Antenna Installation and Alignment.</li>
-                    <li> TV and Antenna Repair Services.</li>
-                </ul>',
+                    <li>TV and Antenna Repair Services.</li>
+                ',
             ],
             [
                 'section_id'        => 9,
                 'name'              => 'Refrigerator Services',
-                'description'       => '<ul class="list-disc list-inside">
-                <li>Refrigerator Installation. </li>
-                <li>Refrigerator Repair and Maintenance.</li>
-                </ul>',
+                'description'       => '
+                 <li>Refrigerator Installation. </li>
+                 <li>Refrigerator Repair and Maintenance.</li>',
             ],
             [
                 'section_id'        => 9,
                 'name'              => 'Washing Machine Services',
-                'description'       => '<ul class="list-disc list-inside">
-                    <li> Washing Machine Installation.</li>
-                    <li>Washing Machine Repair and Maintenance.</li>
-                </ul>
+                'description'       => '
+                     <li>Washing Machine Installation.</li>
+                     <li>Washing Machine Repair and Maintenance.</li>
                ',
                
             ]

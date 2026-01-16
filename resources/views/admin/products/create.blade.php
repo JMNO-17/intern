@@ -90,7 +90,7 @@
                                 </div>
                             </div>
 
-                            <div class="sm:col-span-full">
+                            {{-- <div class="sm:col-span-full">
                                 <div class="col-span-full">
                                     <label for="other_images" class="block text-sm font-medium text-gray-900">
                                         {{ __('labels.product.fields.other_images') }}
@@ -105,7 +105,7 @@
                                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>
