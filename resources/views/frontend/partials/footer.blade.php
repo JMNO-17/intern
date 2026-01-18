@@ -1,23 +1,23 @@
-<div class="bg-white border-t border-gray-200">
+<div class="bg-base2 border-t border-gray-200">
     <!-- Main Footer -->
     <div class="py-10 px-5 lg:px-20">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
             <!-- Logo + Description -->
-            <div class="space-y-4">
+            {{-- <div class="space-y-4">
                 <a href="/" aria-label="Go to Home">
                     <img src="{{ $settings['site_logo'] }}" alt="AVATR Logo" class="h-[117px] w-[120px]">
                 </a>
                 <div class="lg:text-lg font-bold leading-relaxed py-3">
                     {{ app()->getLocale() == 'en' ? $settings['site_description'] : (app()->getLocale() == 'mm' ? $settings['site_description_mm'] : $settings['site_description_cn']) }}
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Other + Product + Social Media -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:text-end">
+            {{-- <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:text-end">
                 <!-- Other -->
                 <div>
-                    <div class="text-gray-600 text-lg font-semibold mb-3">{{ __('labels.footer.others') }}</div>
+                    <div class="text-black text-lg font-semibold mb-3">{{ __('labels.footer.others') }}</div>
                     <ul class="space-y-2">
                         @php
                             $included = ['aboutus', 'contactus'];
@@ -30,7 +30,7 @@
 
                 <!-- Product -->
                 <div>
-                    <div class="text-gray-600 text-lg font-semibold mb-3">{{ __('labels.footer.products') }}</div>
+                    <div class="text-black text-lg font-semibold mb-3">{{ __('labels.footer.products') }}</div>
                     <ul class="space-y-2">
                         @php
                             $excluded = ['home', 'aboutus', 'contactus'];
@@ -43,7 +43,7 @@
 
                 <!-- Social Media -->
                 <div>
-                    <div class="text-gray-600 text-lg font-semibold mb-3">{{ __('labels.footer.social_media') }}</div>
+                    <div class="text-black text-lg font-semibold mb-3">{{ __('labels.footer.social_media') }}</div>
                     <div class="grid grid-cols-9 md:grid-cols-12 lg:grid-cols-3 gap-4">
                         <div class="lg:col-span-2">
                             <a href="{{ $settings['facebook'] }}" aria-label="Connect with Facebook" target="_blank" class="text-blue-600"><i class="fab fa-facebook text-2xl"></i></a>
@@ -59,13 +59,60 @@
                         </div>
                     </div>
                 </div>
+            </div> --}}
+
+
+            {{-- Contact details --}}
+
+            <div id="contactus" class="w-full px-4 sm:px-6 lg:px-20 py-6 lg:py-8">
+                <ul class="space-y-3 text-black">
+                    <!-- Address -->
+                    <li class="flex items-center gap-3">
+                        <span class="flex items-center justify-center w-9 h-9 text-black">
+                         <i class="fa-solid fa-house"></i>
+                        </span>
+
+                        <a href="https://www.google.com/maps/search/{{ urlencode($settings['address']) }}"
+                        target="_blank"
+                        class="transition hover:text-white hover:bg-black hover:px-3 hover:py-1 hover:rounded-lg">
+                            {{ $settings['address'] }}
+                        </a>
+                    </li>
+
+                    <!-- Email -->
+                    <li class="flex items-center gap-3">
+                        <span class="flex items-center justify-center w-9 h-9 text-black">
+                          <i class="fa-regular fa-envelope-open"></i>
+                        </span>
+
+                        <a href="mailto:{{ $settings['email'] }}"
+                        class="transition hover:text-white hover:bg-black hover:px-3 hover:py-1 hover:rounded-lg">
+                            {{ $settings['email'] }}
+                        </a>
+                    </li>
+
+                    <!-- Phone -->
+                    <li class="flex items-center gap-3">
+                        <span class="flex items-center justify-center w-9 h-9 text-black">
+                          <i class="fa-solid fa-phone-volume"></i>
+                        </span>
+
+                        <a href="tel:{{ $settings['phone'] }}"
+                        class="transition hover:text-white hover:bg-black hover:px-3 hover:py-1 hover:rounded-lg">
+                            {{ $settings['phone'] }}
+                        </a>
+                    </li>
+                </ul>
+
             </div>
+
         </div>
     </div>
 
     <!-- Copyright -->
-    <div class="py-5 px-5 lg:px-20 border-gray-200 text-center justify-center text-white bg-black">
-        © {{ __('labels.footer.developed_year') }} {{ $settings['site_name'] }}. {{ __('labels.footer.all_rights_reserved') }}.
+    <div class="py-5 px-5 lg:px-20 border-gray-200 text-center justify-center text-white bg-base3">
+        © {{ __('labels.footer.developed_year') }} Build in Design.  {{ __('labels.footer.all_rights_reserved') }}.
+        <br/> Designed by {{ $settings['site_name'] }}.
     </div>
 
 </div>

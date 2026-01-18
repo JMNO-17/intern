@@ -9,7 +9,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 
-class Category extends Model implements HasMedia
+class Service extends Model implements HasMedia
 {
     use ImageTrait, InteractsWithMedia;
 
@@ -21,7 +21,7 @@ class Category extends Model implements HasMedia
     protected $fillable = [
         'name',
         'description',
-        // 'section_id',
+        'section_id',
         'created_at',
         'updated_at',
     ];
@@ -33,13 +33,13 @@ class Category extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('category_image')
+        $this->addMediaCollection('service_image')
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/gif', 'image/webp']);
     }
 
-    // public function section()
-    // {
-    //     return $this->belongsTo(Section::class);
-    // }
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
+    }
 
 }

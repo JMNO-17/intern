@@ -91,22 +91,22 @@ class PermissionsTableSeeder extends Seeder
                 'display_name' => 'Section Access',
             ],
 
-            // bannerslider
+            // about
             [
-                'name' => 'bannerslider_access',
-                'display_name' => 'BannerSlider Access',
+                'name' => 'about_access',
+                'display_name' => 'About Access',
             ],
             [
-                'name' => 'bannerslider_create',
-                'display_name' => 'BannerSlider Create',
+                'name' => 'about_create',
+                'display_name' => 'About Create',
             ],
             [
-                'name' => 'bannerslider_edit',
-                'display_name' => 'BannerSlider Edit',
+                'name' => 'about_edit',
+                'display_name' => 'About Edit',
             ],
             [
-                'name' => 'bannerslider_delete',
-                'display_name' => 'BannerSlider Delete',
+                'name' => 'about_delete',
+                'display_name' => 'About Delete',
             ],
 
             // content description
@@ -127,24 +127,24 @@ class PermissionsTableSeeder extends Seeder
                 'display_name' => 'Content Description Delete',
             ],
 
-            // category
+            // service
+            [
+                'name' => 'service_access',
+                'display_name' => 'Service Access',
+            ],
+            [
+                'name' => 'service_create',
+                'display_name' => 'Service Create',
+            ],
+            [
+                'name' => 'service_edit',
+                'display_name' => 'Service Edit',
+            ],
+            [
+                'name' => 'service_delete',
+                'display_name' => 'Service Delete',
+            ],
 
-            [
-                'name' => 'category_access',
-                'display_name' => 'Category Access',
-            ],
-            [
-                'name' => 'category_create',
-                'display_name' => 'Category Create',
-            ],
-            [
-                'name' => 'category_edit',
-                'display_name' => 'Category Edit',
-            ],
-            [
-                'name' => 'category_delete',
-                'display_name' => 'Category Delete',
-            ],
 
             // product
 

@@ -4,7 +4,7 @@
 @plugin "flowbite/plugin";
 @plugin '@tailwindcss/forms';
 
-@font-face {
+/* @font-face {
     font-family: 'Inter';
     src: url("/public/fonts/Inter-VariableFont_opsz,wght.ttf") format('truetype'),
          url("/public/fonts/Inter-VariableFont_opsz,wght.woff") format('woff');
@@ -17,13 +17,48 @@
     src: url('/public/fonts/SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
     font-weight: 100 700;
     font-style: normal;
+} */
+
+@font-face {
+ font-family: 'Times New Roman';
+    src: url('/public/fonts/TimesNewRoman.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
 }
 
 @theme {
-    --color-blue: #11E0FE;
+    /* --color-blue: #11E0FE;
     --background-image-blue-hover: linear-gradient(180deg, #00E0FF 0%, #00BFFF 50%, #009DFF 100%);
     --color-dark-gray: #313B45;
-    --color-light-gray: #6B7280;
+    --color-light-gray: #6B7280; */
+   
+    --color-black: #000000;
+    --color-base1: #F9F3E4;
+    --color-base2: #F4EBD0;
+    --color-base3: #E9C763;
+    --color-base4: #AECD87;
+
+}
+
+:root {
+  --hero-bg: url('https://images.pexels.com/photos/572056/pexels-photo-572056.jpeg');
+}
+
+
+@layer utilities {
+  .bg-hero {
+    background-image: var(--hero-bg);
+    background-size: cover;
+    
+  }
+}
+
+body {
+    font-family: 'Times New Roman';
+    background-color: var(--color-base-1);
+    color: var(--color-black);
+    margin: 0;
+    padding: 0;
 }
 
 [x-cloak] {
@@ -39,8 +74,12 @@
     font-family: 'Inter', 'Segoe UI', 'Arial', 'sans-serif';
 }
 
+.font-times-new-roman {
+    font-family: 'Times New Roman', 'Segoe UI', 'Arial', 'sans-serif';
+}
+
 .font-space-grotesk {
-    font-family: 'Space Grotesk', 'Segoe UI', 'Arial', 'sans-serif';
+    font-family: 'Times New Roman','Space Grotesk', 'Segoe UI', 'Arial', 'sans-serif';
 }
 
 .custom-bg {

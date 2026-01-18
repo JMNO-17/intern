@@ -35,7 +35,7 @@
                             <tr>
                                 <th scope="col" class="px-6 py-3 font-semibold">{{ __('global.no') }}</th>
                                 <th scope="col" class="px-6 py-3 font-semibold">
-                                    {{ __('labels.bannerslider.fields.section_id') }} ({{ __('labels.section.fields.menu_id') }})
+                                    {{ __('labels.about.fields.section_id') }} ({{ __('labels.section.fields.menu_id') }})
                                 </th>
                                 <th scope="col" class="px-6 py-3 font-semibold">
                                     {{ __('labels.contentdescription.fields.title') }}

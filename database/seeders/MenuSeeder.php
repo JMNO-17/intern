@@ -24,10 +24,21 @@ class MenuSeeder extends Seeder
                 'slug'          => 'about-us',
             ],
             [
+                'name'          => 'Product',
+                'route_name'    => 'product',
+                'slug'          => 'product',
+            ],
+            [
+                'name'          => 'Service',
+                'route_name'    => 'service',
+                'slug'          => 'service',
+            ],
+            [
                 'name'          => 'Contact Us',
                 'route_name'    => 'contactus',
                 'slug'          => 'contact-us',
             ]
+
         ];
 
         Menu::insert($menus);

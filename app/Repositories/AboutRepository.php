@@ -3,19 +3,19 @@
 namespace App\Repositories;
 
 use Exception;
-use App\Models\Category;
+use App\Models\About;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Collection;
-use App\Repositories\Interfaces\CategoryRepositoryInterface;
+use App\Repositories\Interfaces\AboutRepositoryInterface;
 
-class CategoryRepository implements CategoryRepositoryInterface
+class AboutRepository implements AboutRepositoryInterface
 {
     public function all(): Collection
     {
-        return Category::latest()->get();
+        return About::latest()->get();
     }
 
     public function find($id)
@@ -27,84 +27,85 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         DB::beginTransaction();
         try {
-            $categoryImages = $data['category_image'] ?? [];
-            unset($data['category_image']);
-            $category = Category::create($data);
+            $aboutImages = $data['about_image'] ?? [];
+            unset($data['about_image']);
+            $about = About::create($data);
             DB::commit();
-
-            $tempFolder = storage_path('uploads/temp/category/' . Auth::id());
-            foreach ((array) $categoryImages as $file){
+            // Attach media after commit
+            $tempFolder = storage_path('uploads/temp/about/' . Auth::id());
+            foreach ((array) $aboutImages as $file) {
                 $filePath = $tempFolder . '/' . $file;
-                if(is_file($filePath)) {
+                if (is_file($filePath)) {
                     try {
-                        $category->addMedia($filePath)->toMediaCollection('category_image');
+                        $about->addMedia($filePath)->toMediaCollection('about_image');
                     } catch (Exception $e) {
-                        Log::warning("Failed to attach media: {$filePath}",[
+                        Log::warning("Failed to attach media: {$filePath}", [
                             'error' => $e->getMessage(),
-                            'category_id' => $category->id,
+                            'about_id' => $about->id,
                         ]);
                     }
                 }
             }
-            return $category;
+            // optional cleanup
+            // File::deleteDirectory($tempFolder);
+            return $about;
         } catch (Exception $e) {
             DB::rollBack();
-            Log::error('Category creation failed', [
+            Log::error('About creation failed', [
                 'error' => $e->getMessage(),
             ]);
             throw $e;
         }
     }
 
-    public function update($data, $category)
+    public function update($data, $about)
     {
         try {
             DB::beginTransaction();
-            if (isset($data['category_image']) && is_array($data['category_image'])) {
-                foreach ($data['category_image'] as $fileName) {
-                    $tempPath = storage_path('uploads/temp/category/' .Auth::id() . '/' . $fileName);
+            if (isset($data['about_image']) && is_array($data['about_image'])) {
+                foreach ($data['about_image'] as $fileName) {
+                    $tempPath = storage_path('uploads/temp/about/' . Auth::id() . '/' . $fileName);
                     if (file_exists($tempPath)) {
                         try {
-                            $category->addMedia($tempPath)->toMediaCollection('category_image');
+                            $about->addMedia($tempPath)->toMediaCollection('about_image');
                             if (file_exists($tempPath)) {
                                 unlink($tempPath);
                             }
                         } catch (Exception $e) {
                             Log::error("Failed to add media file: {$tempPath}", [
                                 'error' => $e->getMessage(),
-                                'category_id' => $category->id,
+                                'about_id' => $about->id,
                             ]);
                         }
                     } else {
-                        Log::warning("Category image file not found in temp directory: {$tempPath}", [
-                            'category_id' => $category->id,
+                        // For multiple images, just skip if not found in temp, but log for traceability
+                        Log::warning("About image file not found in temp directory: {$tempPath}", [
+                            'about_id' => $about->id,
                             'file_name' => $fileName,
                         ]);
                     }
                 }
-                $tempFolder = storage_path('uploads/temp/category/' . Auth::id());
+                $tempFolder = storage_path('uploads/temp/about/' . Auth::id());
                 if (File::exists($tempFolder) && count(File::files($tempFolder)) === 0) {
                     File::deleteDirectory($tempFolder);
                 }
             }
-            unset($data['category_image']);
-            $category->update($data);
+            unset($data['about_image']);
+            $about->update($data);
             DB::commit();
         } catch (Exception $e) {
-            DB::rollback();
-            Log::error('Category update failed', [
-                'category_id' => $category->id,
+            DB::rollBack();
+            Log::error('About update failed', [
+                'about_id' => $about->id,
                 'error' => $e->getMessage(),
             ]);
             return redirect()->back()->withErrors(new \Illuminate\Support\MessageBag(['catch_exception' => $e->getMessage()]));
         }
-        return $category;
-
+        return $about;
     }
 
-
-    public function forceDelete($category)
+    public function forceDelete($about)
     {
-        $category->forceDelete();
+        $about->forceDelete();
     }
 }
