@@ -67,12 +67,12 @@
 
 
 
-                           
+
 
                         </div>
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
-                           
+
                             <div class="sm:col-span-full">
                                 <div class="col-span-full">
                                     <label for="featured_image" class="block text-sm font-medium text-gray-900">
@@ -128,7 +128,6 @@
 @parent
    <script>
         var uploadedDocumentMap = {}
-        var uploadedOtherImagesMap = {}
 
         Dropzone.options.featuredImageDropzone = {
             url: '{{ route('admin.products.storeMedia') }}',
@@ -161,51 +160,11 @@
                             name = uploadedDocumentMap[file.name]
                         }
                         $('form').find('input[name="featured_image[]"][value="' + name + '"]').remove();
-                        // removeMedia(file.name, 'featured_image');
+                        removeMedia(file.name, 'featured_image');
                     }
                 });
             },
         }
-
-        Dropzone.options.otherImagesDropzone = {
-            url: '{{ route('admin.products.storeMedia') }}',
-            maxFilesize: 2, // MB
-            maxFiles: 5, // Allow multiple images
-            addRemoveLinks: true,
-            headers: {
-                'X-CSRF-TOKEN': "{{ csrf_token() }}",
-                'type': 'other_images'
-            },
-            success: function(file, response) {
-                $('form').append('<input type="hidden" name="other_images[]" value="' + response.name + '">')
-                uploadedOtherImagesMap[file.name] = response.name
-            },
-            removedfile: function(file) {
-                Swal.fire({
-                    title: "Are you sure you want to remove this image?",
-                    text: "If you remove this, it will be delete from data.",
-                    icon: "warning",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: '#FF0000',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((willDelete) => {
-                    if (willDelete.isConfirmed) {
-                        file.previewElement.remove()
-                        var name = ''
-                        if (typeof file.file_name !== 'undefined') {
-                            name = file.file_name
-                        } else {
-                            name = uploadedOtherImagesMap[file.name]
-                        }
-                        $('form').find('input[name="other_images[]"][value="' + name + '"]').remove();
-                        // removeMedia(file.name, 'other_images');
-                    }
-                });
-            },
-        }
-
-       
 
 
     </script>

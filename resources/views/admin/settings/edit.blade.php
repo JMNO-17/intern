@@ -123,7 +123,7 @@
                             <div class="w-full px-2 my-2">
                                 <label class="block text-sm font-medium text-gray-700 mb-1" for="address">{{ __('labels.setting.fields.address') }}</label>
                                 <textarea type="text" name="address" id="address"
-                                    class="w-full border-gray-300 rounded-md shadow-sm focus:ring-[var(--default-background)] focus:border-[var(--default-background)] text-sm {{ $errors->has('address') ? 'border-red-500' : '' }}">{{ $settings['address'] }}</textarea>
+                                    class="w-full border-gray-300 rounded-md shadow-sm focus:ring- focus:border-[var(--default-background)] text-sm {{ $errors->has('address') ? 'border-red-500' : '' }}">{{ $settings['address'] }}</textarea>
                             </div>
                         </div>
 

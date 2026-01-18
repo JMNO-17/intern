@@ -30,10 +30,8 @@ class ProductRepository implements ProductRepositoryInterface
         try {
             DB::beginTransaction();
                 $featuredImages = MediaUploadHelper::extractImagesFromData($data, 'featured_image');
-                $otherImages = MediaUploadHelper::extractImagesFromData($data, 'other_images');
                 $product = Product::create($data);
                 MediaUploadHelper::processImages($product, $featuredImages, 'featured_image', 'product');
-                MediaUploadHelper::processImages($product, $otherImages, 'other_images', 'productOtherImages');
             DB::commit();
 
             return $product;
@@ -46,12 +44,45 @@ class ProductRepository implements ProductRepositoryInterface
         }
     }
 
+    //  public function store($data)
+    // {
+    //     DB::beginTransaction();
+    //     try {
+    //         $productImages = $data['featured_image'] ?? [];
+    //         unset($data['featured_image']);
+    //         $product = product::create($data);
+    //         DB::commit();
+
+    //         $tempFolder = storage_path('uploads/temp/product/' . Auth::id());
+    //         foreach ((array) $productImages as $file){
+    //             $filePath = $tempFolder . '/' . $file;
+    //             if(is_file($filePath)) {
+    //                 try {
+    //                     $product->addMedia($filePath)->toMediaCollection('featured_image');
+    //                 } catch (Exception $e) {
+    //                     Log::warning("Failed to attach media: {$filePath}",[
+    //                         'error' => $e->getMessage(),
+    //                         'product_id' => $product->id,
+    //                     ]);
+    //                 }
+    //             }
+    //         }
+    //         return $product;
+    //     } catch (Exception $e) {
+    //         DB::rollBack();
+    //         Log::error('product creation failed', [
+    //             'error' => $e->getMessage(),
+    //         ]);
+    //         throw $e;
+    //     }
+    // }
+
+
     public function update($data, $section)
     {
         try {
             DB::beginTransaction();
             MediaUploadHelper::handleImageUpdate($section, $data, 'featured_image', 'product');
-            MediaUploadHelper::handleImageUpdate($section, $data, 'other_images', 'productOtherImages');
             // unset($data['featured_image'], $data['other_images']);
             $section->update($data);
             DB::commit();
@@ -69,6 +100,54 @@ class ProductRepository implements ProductRepositoryInterface
             ]));
         }
     }
+
+    //   public function update($data, $product)
+    // {
+    //     try {
+    //         DB::beginTransaction();
+    //         if (isset($data['featured_image']) && is_array($data['featured_image'])) {
+    //             foreach ($data['featured_image'] as $fileName) {
+    //                 $tempPath = storage_path('uploads/temp/product/' .Auth::id() . '/' . $fileName);
+    //                 if (file_exists($tempPath)) {
+    //                     try {
+    //                         $product->addMedia($tempPath)->toMediaCollection('featured_image');
+    //                         if (file_exists($tempPath)) {
+    //                             unlink($tempPath);
+    //                         }
+    //                     } catch (Exception $e) {
+    //                         Log::error("Failed to add media file: {$tempPath}", [
+    //                             'error' => $e->getMessage(),
+    //                             'product_id' => $product->id,
+    //                         ]);
+    //                     }
+    //                 } else {
+    //                     Log::warning("product image file not found in temp directory: {$tempPath}", [
+    //                         'product_id' => $product->id,
+    //                         'file_name' => $fileName,
+    //                     ]);
+    //                 }
+    //             }
+    //             $tempFolder = storage_path('uploads/temp/product/' . Auth::id());
+    //             if (File::exists($tempFolder) && count(File::files($tempFolder)) === 0) {
+    //                 File::deleteDirectory($tempFolder);
+    //             }
+    //         }
+    //         unset($data['featured_image']);
+    //         $product->update($data);
+    //         DB::commit();
+    //     } catch (Exception $e) {
+    //         DB::rollback();
+    //         Log::error('product update failed', [
+    //             'product_id' => $product->id,
+    //             'error' => $e->getMessage(),
+    //         ]);
+    //         return redirect()->back()->withErrors(new \Illuminate\Support\MessageBag(['catch_exception' => $e->getMessage()]));
+    //     }
+    //     return $product;
+
+    // }
+
+
 
     public function forceDelete($product)
     {

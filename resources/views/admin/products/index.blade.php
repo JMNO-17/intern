@@ -39,7 +39,7 @@
                                 </th>
                                 <th scope="col" class="px-6 py-3 font-semibold">{{ __('labels.product.fields.name') }}</th>
                                 {{-- <th scope="col" class="px-6 py-3 font-semibold">{{ __('labels.product.fields.slug') }}</th> --}}
-                               
+
 
                                 <th scope="col" class="px-6 py-3">
                                     <span class="sr-only">{{ __('global.action') }}</span>

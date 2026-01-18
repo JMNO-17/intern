@@ -1,118 +1,62 @@
 <div class="bg-base2 border-t border-gray-200">
-    <!-- Main Footer -->
-    <div class="py-10 px-5 lg:px-20">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
-            <!-- Logo + Description -->
-            {{-- <div class="space-y-4">
-                <a href="/" aria-label="Go to Home">
-                    <img src="{{ $settings['site_logo'] }}" alt="AVATR Logo" class="h-[117px] w-[120px]">
-                </a>
-                <div class="lg:text-lg font-bold leading-relaxed py-3">
-                    {{ app()->getLocale() == 'en' ? $settings['site_description'] : (app()->getLocale() == 'mm' ? $settings['site_description_mm'] : $settings['site_description_cn']) }}
-                </div>
-            </div> --}}
+   <!-- Main Footer -->
+<div class="py-10 px-5 lg:px-20">
+    <div class="flex flex-col lg:flex-row gap-8">
 
-            <!-- Other + Product + Social Media -->
-            {{-- <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:text-end">
-                <!-- Other -->
-                <div>
-                    <div class="text-black text-lg font-semibold mb-3">{{ __('labels.footer.others') }}</div>
-                    <ul class="space-y-2">
-                        @php
-                            $included = ['aboutus', 'contactus'];
-                        @endphp
-                        @foreach ($all_menus->whereIn('route_name', $included) as $item)
-                            <li><a href="#{{ $item->route_name }}" class="hover:text-white transition hover:bg-black hover:px-4 hover:py-1 hover:rounded-lg">{{ $item->name }}</a></li>
-                        @endforeach
-                    </ul>
-                </div>
+        <!-- Contact Details -->
+        <div class="flex-1">
+            <ul class="space-y-3 text-black">
+                <li class="flex items-center gap-3">
+                    <span class="flex items-center justify-center w-9 h-9">
+                        <i class="fa-solid fa-house"></i>
+                    </span>
+                    <a href="https://www.google.com/maps/search/{{ urlencode($settings['address']) }}"
+                       target="_blank"
+                       class="transition hover:text-white hover:bg-base4 hover:px-3 hover:py-1 hover:rounded-lg">
+                        {{ $settings['address'] }}
+                    </a>
+                </li>
 
-                <!-- Product -->
-                <div>
-                    <div class="text-black text-lg font-semibold mb-3">{{ __('labels.footer.products') }}</div>
-                    <ul class="space-y-2">
-                        @php
-                            $excluded = ['home', 'aboutus', 'contactus'];
-                        @endphp
-                        @foreach ($all_menus->whereNotIn('route_name', $excluded) as $item)
-                            <li><a href="{{ $item->route_name }}" class="hover:text-white transition hover:bg-black hover:px-2 hover:py-1 hover:rounded-lg">{{ $item->name }}</a></li>
-                        @endforeach
-                    </ul>
-                </div>
+                <li class="flex items-center gap-3">
+                    <span class="flex items-center justify-center w-9 h-9">
+                        <i class="fa-solid fa-envelope-open"></i>
+                    </span>
+                    <a href="mailto:{{ $settings['email'] }}"
+                       class="transition hover:text-white hover:bg-base4 hover:px-3 hover:py-1 hover:rounded-lg">
+                        {{ $settings['email'] }}
+                    </a>
+                </li>
 
-                <!-- Social Media -->
-                <div>
-                    <div class="text-black text-lg font-semibold mb-3">{{ __('labels.footer.social_media') }}</div>
-                    <div class="grid grid-cols-9 md:grid-cols-12 lg:grid-cols-3 gap-4">
-                        <div class="lg:col-span-2">
-                            <a href="{{ $settings['facebook'] }}" aria-label="Connect with Facebook" target="_blank" class="text-blue-600"><i class="fab fa-facebook text-2xl"></i></a>
-                        </div>
-                        <div>
-                            <a href="{{ $settings['linkedin'] }}" aria-label="Connect with YouTube" target="_blank" class="text-red-600"><i class="fab fa-youtube text-2xl"></i></a>
-                        </div>
-                        <div class="lg:col-span-2">
-                            <a href="{{ $settings['twitter'] }}" aria-label="Connect with TikTok" target="_blank" class="text-black"><i class="fab fa-twitter text-2xl"></i></a>
-                        </div>
-                        <div>
-                            <a href="{{ $settings['instragram'] }}" aria-label="Connect with Twitter" target="_blank" class="text-black"><i class="fab fa-x-twitter text-2xl"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-
-
-            {{-- Contact details --}}
-
-            <div id="contactus" class="w-full px-4 sm:px-6 lg:px-20 py-6 lg:py-8">
-                <ul class="space-y-3 text-black">
-                    <!-- Address -->
-                    <li class="flex items-center gap-3">
-                        <span class="flex items-center justify-center w-9 h-9 text-black">
-                         <i class="fa-solid fa-house"></i>
-                        </span>
-
-                        <a href="https://www.google.com/maps/search/{{ urlencode($settings['address']) }}"
-                        target="_blank"
-                        class="transition hover:text-white hover:bg-black hover:px-3 hover:py-1 hover:rounded-lg">
-                            {{ $settings['address'] }}
-                        </a>
-                    </li>
-
-                    <!-- Email -->
-                    <li class="flex items-center gap-3">
-                        <span class="flex items-center justify-center w-9 h-9 text-black">
-                          <i class="fa-regular fa-envelope-open"></i>
-                        </span>
-
-                        <a href="mailto:{{ $settings['email'] }}"
-                        class="transition hover:text-white hover:bg-black hover:px-3 hover:py-1 hover:rounded-lg">
-                            {{ $settings['email'] }}
-                        </a>
-                    </li>
-
-                    <!-- Phone -->
-                    <li class="flex items-center gap-3">
-                        <span class="flex items-center justify-center w-9 h-9 text-black">
-                          <i class="fa-solid fa-phone-volume"></i>
-                        </span>
-
-                        <a href="tel:{{ $settings['phone'] }}"
-                        class="transition hover:text-white hover:bg-black hover:px-3 hover:py-1 hover:rounded-lg">
-                            {{ $settings['phone'] }}
-                        </a>
-                    </li>
-                </ul>
-
-            </div>
-
+                <li class="flex items-center gap-3">
+                    <span class="flex items-center justify-center w-9 h-9">
+                        <i class="fa-solid fa-phone-volume"></i>
+                    </span>
+                    <a href="tel:{{ $settings['phone'] }}"
+                       class="transition hover:text-white  hover:bg-base4 hover:px-3 hover:py-1 hover:rounded-lg">
+                        {{ $settings['phone'] }}
+                    </a>
+                </li>
+            </ul>
         </div>
+
+        <!-- Google Map -->
+        @if (!empty($settings['google_map']))
+            <div class="flex">
+                <div class="w-full h-64 sm:h-80 lg:h-64 rounded overflow-hidden shadow-lg">
+                    {!! $settings['google_map'] !!}
+                </div>
+            </div>
+        @endif
+
     </div>
+</div>
+
 
     <!-- Copyright -->
-    <div class="py-5 px-5 lg:px-20 border-gray-200 text-center justify-center text-white bg-base3">
-        © {{ __('labels.footer.developed_year') }} Build in Design.  {{ __('labels.footer.all_rights_reserved') }}.
-        <br/> Designed by {{ $settings['site_name'] }}.
+    <div class="py-4 px-5 lg:px-20 border-t border-gray-200 text-center bg-base3 text-white">
+        © {{ __('labels.footer.developed_year') }} Build in Design. {{ __('labels.footer.all_rights_reserved') }}.
+        <br> Designed by {{ $settings['site_name'] ?? config('app.name') }}.
     </div>
 
 </div>

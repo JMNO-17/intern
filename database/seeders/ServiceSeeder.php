@@ -27,7 +27,7 @@ class ServiceSeeder extends Seeder
             [
                 'section_id'        => 9,
                 'name'              => 'TV & Antenna Services',
-                'description'       => 
+                'description'       =>
                 '
                     <li>TV Installation and Setup.</li>
                     <li>Antenna Installation and Alignment.</li>
@@ -48,7 +48,7 @@ class ServiceSeeder extends Seeder
                      <li>Washing Machine Installation.</li>
                      <li>Washing Machine Repair and Maintenance.</li>
                ',
-               
+
             ]
         ];
 

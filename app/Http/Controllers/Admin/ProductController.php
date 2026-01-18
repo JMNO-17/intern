@@ -92,66 +92,75 @@ class ProductController extends Controller
         return redirect()->back()->with('success', __('global.deleted_success'));
     }
 
+    // public function storeMedia(Request $request)
+    // {
+    //     if ($request->header('type')) {
+    //         $path = storage_path('uploads/temp/productOtherImages/' . Auth::id());
+    //     } else {
+    //         $path = storage_path('uploads/temp/product/' . Auth::id());
+    //     }
+
+    //     $file = $request->file('file');
+    //     $response = common::storeMedia($path, $file);
+    //     return $response;
+    // }
+
     public function storeMedia(Request $request)
     {
-        if ($request->header('type')) {
-            $path = storage_path('uploads/temp/productOtherImages/' . Auth::id());
-        } else {
-            $path = storage_path('uploads/temp/product/' . Auth::id());
-        }
-
+        $path = storage_path('uploads/temp/product/' .Auth::id());
         $file = $request->file('file');
         $response = common::storeMedia($path, $file);
         return $response;
     }
 
-    public function removeMedia(Request $request)
-    {
-        $type = $request->type;
-        $product = product::find($request->id);
-        $status = false;
-        if (! $product) {
-            return response()->json([
-                'status' => false,
-                'type' => $type,
-                'message' => 'Content Description not found.',
-            ], 404);
-        }
-        if ($type == 'featured_image') {
-            $product->clearMediaCollection('featured_image');
-            $status = true;
-        } elseif ($type == 'other_images') {
-            if ($request->has('type') == 'other_images') {
-                $media = $product->getMedia('other_images')->where('name', $request->file_name)->first();
-                if ($media) {
-                    $media->delete();
-                    $status = true;
-                }
-            }
-            $status = true;
-        }
+    // public function removeMedia(Request $request)
+    // {
+    //     $type = $request->type;
+    //     $product = product::find($request->id);
+    //     $status = false;
+    //     if (! $product) {
+    //         return response()->json([
+    //             'status' => false,
+    //             'type' => $type,
+    //             'message' => 'Content Description not found.',
+    //         ], 404);
+    //     }
+    //     if ($type == 'featured_image') {
+    //         $product->clearMediaCollection('featured_image');
+    //         $status = true;
+    //     } elseif ($type == 'other_images') {
+    //         if ($request->has('type') == 'other_images') {
+    //             $media = $product->getMedia('other_images')->where('name', $request->file_name)->first();
+    //             if ($media) {
+    //                 $media->delete();
+    //                 $status = true;
+    //             }
+    //         }
+    //         $status = true;
+    //     }
 
+    //     return response()->json([
+    //         'status' => $status,
+    //         'type' => $type,
+    //     ]);
+    // }
+
+   public function removeMedia(Request $request)
+    {
+
+        $type = $request->type;
+        $product = Product::find($request->id);
+        $status = false;
+        if ($type == 'featured_image') {
+            $mediaItem = $product->getMedia('featured_image')->first();
+            if ($mediaItem) {
+                $mediaItem->delete();
+                $status = true;
+            }
+        }
         return response()->json([
             'status' => $status,
             'type' => $type,
         ]);
-    }
-
-    public function changeStatus(Request $request)
-    {
-        $activeCount = Product::where('status', true)->count();
-        if ($activeCount <= 1 && $request->status == 'false') {
-            return response()->json(['error' => 'One Product Must Be Active.'], 400);
-        } else {
-            $Product = Product::find($request->id);
-            $Product->status = $request->status == 'false' ? false : true;
-            if ($request->status == false) {
-                $Product->save();
-            } elseif ($request->status == true) {
-                $Product->save();
-            }
-            $Product->save();
-            return response()->json(['success' => 'Successfully change status.'], 200);
-        }
     }
 }

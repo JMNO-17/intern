@@ -6,7 +6,6 @@ use App\Models\About;
 use App\Models\Product;
 use App\Models\Section;
 use App\Models\Service;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -28,5 +27,5 @@ class HomeController extends Controller
         return view('frontend.home', compact('abouts', 'products', 'sections', 'services'));
     }
 
-    
+
 }

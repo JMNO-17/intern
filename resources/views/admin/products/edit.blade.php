@@ -54,12 +54,12 @@
                                 @endif
                             </div>
 
-                           
 
-                           
+
+
                         </div>
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            
+
 
                             <div class="sm:col-span-full">
                                 <div class="col-span-full">
@@ -115,7 +115,7 @@
 @section('scripts')
     <script>
         var uploadedDocumentMap = {}
-        var uploadedOtherImagesMap = {}
+
         Dropzone.options.featuredImageDropzone = {
             url: '{{ route('admin.products.storeMedia') }}',
             maxFilesize: 2, // MB
@@ -152,118 +152,33 @@
                 });
             },
             init: function() {
-                @if (isset($product) &&
-                        $product->getMedia('featured_image')->first() &&
-                        $product->getMedia('featured_image')->first() !== '/user-avatar.png')
-                    var fileName = {!! json_encode(\App\Models\Product::getImageName($product->featured_image)) !!};
-
-                    console.log('file name',fileName);
-                    var mockFile = {
-                        name: fileName,
-                        size: 2,
-                        accepted: true
-                    };
-                    // Always use a public URL for preview
-                    var publicUrl = '';
-                    var imgPath = {!! json_encode($product->getMedia('featured_image')->first()->getFullUrl()) !!};
-
-                    console.log('path', imgPath);
-                    if (imgPath.startsWith('/images/')) {
-                        publicUrl = imgPath;
-                    } else {
-                        publicUrl = imgPath;
-                    }
-                    this.emit('addedfile', mockFile);
-                    this.emit('thumbnail', mockFile, publicUrl);
-                    this.emit('complete', mockFile);
-                    this.files.push(mockFile);
-                @endif
-            }
-        }
-
-        Dropzone.options.otherImagesDropzone = {
-            url: '{{ route('admin.products.storeMedia') }}',
-            maxFilesize: 2, // MB
-            maxFiles: 5, // Allow multiple images
-            addRemoveLinks: true,
-            headers: {
-                'X-CSRF-TOKEN': "{{ csrf_token() }}",
-                'type': 'other_images'
-            },
-            success: function(file, response) {
-                $('form').append('<input type="hidden" name="other_images[]" value="' + response.name + '">')
-                uploadedOtherImagesMap[file.name] = response.name
-            },
-            removedfile: function(file) {
-                Swal.fire({
-                    title: "Are you sure you want to remove this image?",
-                    text: "If you remove this, it will be delete from data.",
-                    icon: "warning",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: '#FF0000',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((willDelete) => {
-                    if (willDelete.isConfirmed) {
-                        file.previewElement.remove()
-                        var name = ''
-                        if (typeof file.file_name !== 'undefined') {
-                            name = file.file_name
-                        } else {
-                            name = uploadedOtherImagesMap[file.name]
-                        }
-                        $('form').find('input[name="other_images[]"][value="' + name + '"]').remove();
-                        removeMedia(file.name, 'other_images');
-                    }
-                });
-            },
-            init: function() {
-                @if (isset($product) && $product->getMedia('other_images')->count() > 0)
-                    @foreach ($product->getMedia('other_images') as $image)
-                        var fileName = {!! json_encode($image->name) !!};
+                @if (isset($product) && $product->getMedia('featured_image')->count())
+                    @php
+                        $productImages = $product->getMedia('featured_image');
+                    @endphp
+                    @foreach ($productImages as $media)
+                        var fileName = {!! json_encode($media->file_name) !!};
                         var mockFile = {
                             name: fileName,
                             size: 2,
                             accepted: true
                         };
-                        var publicUrl = {!! json_encode($image->getFullUrl()) !!};
+                        var publicUrl = {!! json_encode($media->getFullUrl()) !!};
                         this.emit('addedfile', mockFile);
                         this.emit('thumbnail', mockFile, publicUrl);
                         this.emit('complete', mockFile);
                         this.files.push(mockFile);
+                        mockFile.file_name = fileName;
+                        uploadedDocumentMap[mockFile.name] = fileName;
+                        $('form').append('<input type="hidden" name="featured_image[]" value="' + fileName + '">');
                     @endforeach
                 @endif
             }
         }
 
-        function removeMedia(file_name, type) {
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('admin.products.removeMedia') }}',
-                data: {
-                    'file_name': file_name,
-                    'type': type,
-                    'id': {!! $product->id !!}
-                },
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                },
-                success: function(data) {
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        text: "Successfully Removed Image!",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                },
-                error: function(data) {
-                    console.log(data.error);
-                }
-            });
-        }
 
-       
+
+
 
     </script>
 @endsection
