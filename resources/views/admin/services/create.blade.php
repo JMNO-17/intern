@@ -155,19 +155,23 @@
 
          if (document.getElementById('description')) {
             var editor = new Quill('#description-area', {
-                theme: 'snow',
-                modules: {
-                    toolbar: [
-                        [{ header: [1, 2, 3, false] }],
-                        ['bold', 'italic', 'underline', 'strike'],
-                        [{ align: ['right', 'center', 'justify'] }],
-                        [{ color: ['#000000', '#ff0000', '#00ff00'] }],
-                        ['image'],
-                        [{ list: 'ordered' }, { list: 'bullet' }],
-                        ['clean']
-                    ]
-                }
-            });
+    theme: 'snow',
+    modules: {
+        toolbar: [
+            [{ header: [1,2,3,false] }],
+            ['bold','italic','underline','strike'],
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            ['link','image'],
+            ['clean']
+        ]
+    },
+    formats: ['header','bold','italic','underline','strike','list','link','image'],
+    clipboard: {
+        matchVisual: false  // important: prevents Quill from auto-wrapping lists in <p>
+    }
+});
+
+
 
             var description = document.getElementById('description');
 

@@ -31,7 +31,7 @@
     --background-image-blue-hover: linear-gradient(180deg, #00E0FF 0%, #00BFFF 50%, #009DFF 100%);
     --color-dark-gray: #313B45;
     --color-light-gray: #6B7280; */
-   
+
     --color-black: #000000;
     --color-base1: #F9F3E4;
     --color-base2: #F4EBD0;
@@ -49,7 +49,7 @@
   .bg-hero {
     background-image: var(--hero-bg);
     background-size: cover;
-    
+
   }
 }
 
@@ -195,6 +195,26 @@ body {
     opacity: 1;
 }
 
+.service-description ul {
+    list-style-type: disc !important;
+    padding-left: 1.5rem;
+}
+
+.service-description ol {
+    list-style-type: decimal !important;
+    padding-left: 1.5rem;
+}
+
+.service-description li {
+    margin-bottom: 0.25rem;
+}
+
+.service-description img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0.5rem 0;
+}
 
 
 

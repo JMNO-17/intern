@@ -58,20 +58,28 @@ class ServiceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Service $service)
-    {
-        abort_if(Gate::denies('service_access'),Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $fields = Arr::except($service->getAttributes(), ['id', 'deleted_at', 'created_at', 'updated_at']);
-        $fields['section_id'] = optional($service->section)->name;
+   public function show(Service $service)
+{
+    abort_if(Gate::denies('service_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $redirect_route = route('admin.services.index');
-        $label = 'service';
-        $images = $service->getMedia('service_image');
-        if ($images->isNotEmpty()) {
-            $fields['service_image'] = $images;
-        }
-        return view('admin.common.show', compact('label', 'fields', 'redirect_route'));
+    // Get all attributes except timestamps and id
+    $fields = Arr::except($service->getAttributes(), ['id', 'deleted_at', 'created_at', 'updated_at']);
+
+    // Replace section_id with section name
+    $fields['section_id'] = optional($service->section)->name;
+
+    // Include images if exist
+    $images = $service->getMedia('service_image');
+    if ($images->isNotEmpty()) {
+        $fields['service_image'] = $images;
     }
+
+    // Pass to generic show view
+    $redirect_route = route('admin.services.index');
+    $label = 'service';
+
+    return view('admin.common.show', compact('label', 'fields', 'redirect_route'));
+}
 
     /**
      * Show the form for editing the specified resource.

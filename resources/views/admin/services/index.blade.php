@@ -9,6 +9,7 @@
                         {{__('labels.service.title')}}
                     </div>
                     <p class="mt-2 text-sm text-gray-700">{{__('labels.service.description')}}</p>
+
                 </div>
                  @can('service_create')
                         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
@@ -36,8 +37,8 @@
                         <tr>
                             <th scope="col" class="px-6 py-3 font-semibold">{{__('global.no')}}</th>
                             <th scope="col" class="px-6 py-3 font-semibold">
-                                    {{ __('labels.service.fields.section_id') }} 
-                                   
+                                    {{ __('labels.service.fields.section_id') }}
+
                                     ({{ __('labels.section.fields.menu_id') }})
                             </th>
                             <th scope="col" class="px-6 py-3 font-semibold">
