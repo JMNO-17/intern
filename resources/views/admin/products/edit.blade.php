@@ -177,6 +177,32 @@
         }
 
 
+        function removeMedia(file_name, type) {
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('admin.products.removeMedia') }}',
+                data: {
+                    'file_name': file_name,
+                    'type': type,
+                    'id': {!! $product->id !!}
+                },
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                success: function(data) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        text: "Successfully Removed Image!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                },
+                error: function(data) {
+                    console.log(data.error);
+                }
+            });
+        }
 
 
 

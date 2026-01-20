@@ -30,7 +30,7 @@
 
                 {{-- Logo --}}
                 <div class="flex lg:flex-1">
-                    <a href="#home">
+                    <a href="#">
                         <img src="{{ $settings['site_logo'] ?? asset('images/logo.png') }}" class="w-[45px] h-auto border-none" />
                     </a>
                 </div>

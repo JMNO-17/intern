@@ -80,7 +80,7 @@
                             </div> --}}
                              <div class="sm:col-span-full">
                                 <label for="description" class="block text-sm/6 font-medium text-gray-900 required">
-                                    {{ __('labels.product.fields.description') }}
+                                    {{ __('labels.about.fields.description') }}
                                 </label>
                                 {{-- <div class="mt-2">
                                     <textarea name="description" id="description" autocomplete="given-description" required

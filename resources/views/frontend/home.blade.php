@@ -2,20 +2,32 @@
 
 @section('content')
 
-    <!-- Hero -->
-    <section id="home" class="w-full scroll-mt-24">
-        <img src="https://images.pexels.com/photos/572056/pexels-photo-572056.jpeg" alt=""
-            class="block w-full h-[250px] sm:h-[300px] md:h-[400px] object-cover">
+    @php
+        $heroAbout = $abouts->firstWhere('section.name', 'Home');
+        $aboutUs = $abouts->firstWhere('name', 'About Us');
+        $aboutWhy = $abouts->firstWhere('name', 'Why Choose Lin Oo?');
+    @endphp
+    <!-- Hero (image from About Us CRUD) -->
+
+    <section id="home" class="w-full scroll-mt-12">
+        @if ($heroAbout && $heroAbout->getFirstMedia('about_image'))
+            <img
+            src="{{ $heroAbout->getFirstMediaUrl('about_image', 'original') }}"
+            alt="{{ $heroAbout->name }}"
+            class="block w-full h-[250px] sm:h-[300px] md:h-[400px] object-cover"
+            loading="eager"
+        >
+        @endif
     </section>
 
+
+
+
     <!-- About Section -->
-    <section id="aboutus" class="scroll-mt-24 bg-hero">
+    <section id="aboutus" class="scroll-mt-12 bg-hero">
         <div class="w-full px-4 sm:px-6 lg:px-20 py-6 lg:py-8">
 
-            @php
-                $aboutUs = $abouts->firstWhere('name', 'About Us');
-                $aboutWhy = $abouts->firstWhere('name', 'Why Choose Lin Oo?');
-            @endphp
+
 
             <div class="space-y-8 max-w-[1440px] mx-auto">
 
@@ -45,8 +57,9 @@
         </div>
     </section>
 
+
     <!-- Products Section -->
-    <section id="product" class="scroll-mt-24 px-4 sm:px-6 lg:px-20 py-6 lg:py-8 bg-base2">
+    <section id="product" class="scroll-mt-12 px-4 sm:px-6 lg:px-20 py-6 lg:py-8 bg-base2">
 
         <h1 class="text-xl sm:text-2xl font-bold mb-6 text-center">
             Our Products
@@ -82,7 +95,7 @@
     </section>
 
     <!-- Services Section -->
-    <section id="service" class="scroll-mt-24 bg-base1 px-4 sm:px-6 lg:px-20 py-6 lg:py-8">
+    <section id="service" class="scroll-mt-12 bg-base1 px-4 sm:px-6 lg:px-20 py-6 lg:py-8">
         <h1 class="text-xl sm:text-2xl font-bold text-center">
             Services
         </h1>
@@ -105,9 +118,9 @@
                                 class="h-48 w-full object-cover rounded mb-4" alt="{{ $service->name }}">
                         @endif
 
-                        <div class="service-description">
-    {!! $service->description !!}
-</div>
+                        <div class="quill-content text-black text-base leading-relaxed">
+                            {!! $service->description !!}
+                        </div>
 
 
                     </div>
