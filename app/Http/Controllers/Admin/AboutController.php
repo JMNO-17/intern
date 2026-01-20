@@ -51,9 +51,9 @@ class AboutController extends Controller
         $fields['section_id'] = optional($about->section)->name;
         $redirect_route = route('admin.abouts.index');
         $label = 'about';
-        $images = $about->getMedia('aboutus_image');
+        $images = $about->getMedia('about_image');
         if ($images->isNotEmpty()) {
-            $fields['aboutus_image'] = $images;
+            $fields['about_image'] = $images;
         }
         return view('admin.common.show', compact('label', 'fields', 'redirect_route'));
     }
@@ -91,8 +91,8 @@ class AboutController extends Controller
         $type = $request->type;
         $about = About::find($request->id);
         $status = false;
-        if ($type == 'aboutus_image') {
-            $mediaItem = $about->getMedia('aboutus_image')->first();
+        if ($type == 'about_image') {
+            $mediaItem = $about->getMedia('about_image')->first();
             if ($mediaItem) {
                 $mediaItem->delete();
                 $status = true;

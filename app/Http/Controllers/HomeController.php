@@ -11,21 +11,30 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $abouts = About::with('section', 'media')->get();
+        // Get all about records
+        $abouts = About::with('media')->get();
 
+        // Get ONLY "About Us"
+        $aboutUs = $abouts->firstWhere('name', 'About Us');
+
+        // Products
         $sections = Section::has('products')->get();
 
         $products = Product::with(['section', 'media'])
-        ->when(request('section_id'), function ($query) {
-            $query->where('section_id', request('section_id'));
-        })
-        ->get();
+            ->when(request('section_id'), function ($query) {
+                $query->where('section_id', request('section_id'));
+            })
+            ->get();
 
+        // Services
         $services = Service::with(['section', 'media'])->get();
 
-
-        return view('frontend.home', compact('abouts', 'products', 'sections', 'services'));
+        return view(
+            'frontend.home',
+            compact('abouts', 'aboutUs', 'products', 'sections', 'services')
+        );
     }
-
-
 }
+
+
+

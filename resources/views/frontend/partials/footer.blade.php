@@ -1,7 +1,7 @@
 <div class="bg-base2 border-t border-gray-200">
 
    <!-- Main Footer -->
-<div class="py-10 px-5 lg:px-20">
+<div class="scroll-mt-12 py-10 px-5 lg:px-20" id="contactus">
     <div class="flex flex-col lg:flex-row gap-8">
 
         <!-- Contact Details -->
