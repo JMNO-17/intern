@@ -13,7 +13,7 @@ class HomeController extends Controller
     {
         // Get all about records
         $abouts = About::with('media')->get();
-
+ 
         // Get ONLY "About Us"
         $aboutUs = $abouts->firstWhere('name', 'About Us');
 
